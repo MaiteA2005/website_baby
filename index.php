@@ -1,28 +1,15 @@
 <?php 
-  //html = state les onthoud niks
-  //php = onthoud
-
-  //zijn de inlog gegevens oke (coookies)
-  //check if cookie "login" exists
-  //if(!isset($_COOKIE['login'])){
-    //else redirect to login.php
-    //header("Location: login.php");
-  //} else{
-    //$cookie = $_COOKIE['login'];
-    //$salt = "yt5789HJKJNBVFHKhygLMNO,ejngdhrfjed678";
-
-    //$pieces = explode("," , $cookie);
-    //if(md5($pieces[0].$salt) !== $pieces[1]){
-      //header('Location: login.php');
-    //} 
-  //}
-
-  //zijn de inlog gegevens oke (session)
+  //zijn de inlog gegevens oke
   session_start();
   if($_SESSION['loggedin'] !== true){
     header('Location: login.php');
   }
 
+  $conn = new mysqli('localhost' , 'root' , '' , 'webshop');
+  $sql = "SELECT * FROM products";
+  $result = $conn->query($sql);
+  $products = $result->fetch_all(MYSQLI_ASSOC);
+  //var_dump($products);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -32,12 +19,15 @@
   <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
-
   <div class="collection">
     <h1>Webshop</h1>
     <a href="logout.php" class="navbar__logout">Hi Stranger, logout?</a>
   </div>
-</div>
+  <?php foreach($products as $product): ?>
+  <article>
+    <h1><?php echo $product['title']?> : €<?php echo $product['price']?></h1>
+  </article>
+  <?php endforeach ?>  
 
 </body>
 </html>
