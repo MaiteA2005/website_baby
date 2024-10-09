@@ -1,14 +1,25 @@
 <?php 
+  //'mysql:dbname=testdb;host=127.0.0.1'
+  //PDO connection
+  $conn = new PDO('mysql:dbname=webshop;host=localhost', "root", "");
+
+  //databank connecten
+  //$conn = new mysqli('localhost' , 'root' , '' , 'webshop');
+
+  //select * from prod
+  $statement = $conn->prepare("SELECT * FROM products");
+  $statement->execute();
+  $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
   //zijn de inlog gegevens oke
   session_start();
   if($_SESSION['loggedin'] !== true){
     header('Location: login.php');
   }
 
-  $conn = new mysqli('localhost' , 'root' , '' , 'webshop');
-  
-  $result = $conn->query("SELECT * FROM products");
-  $products = $result->fetch_all(MYSQLI_ASSOC);
+
+  //$result = $conn->query("SELECT * FROM products");
+  //$products = $result->fetch_all(MYSQLI_ASSOC);
   //var_dump($products);
 
 ?><!DOCTYPE html>
