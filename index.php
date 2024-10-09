@@ -6,8 +6,8 @@
   }
 
   $conn = new mysqli('localhost' , 'root' , '' , 'webshop');
-  $sql = "SELECT * FROM products";
-  $result = $conn->query($sql);
+  
+  $result = $conn->query("SELECT * FROM products");
   $products = $result->fetch_all(MYSQLI_ASSOC);
   //var_dump($products);
 
