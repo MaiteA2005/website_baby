@@ -28,6 +28,7 @@
   <meta charset="UTF-8">
   <title>Webshop 2XD</title>
   <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="stylesheet" href="css/stylesheet.index.css">
 </head>
 <body>
   <div class="collection">
