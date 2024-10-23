@@ -38,7 +38,8 @@
 	<div class="websiteLogin">
 		<div class="form form--login">
 			<form action="" method="post">
-				<h2 form__title>Sign In</h2>
+				<h2 form__title>Log In</h2>
+				<h2 form__title><a href="signup.php">Sign up</a></h2>
 
 				<?php if(isset($error)): ?>
 				<div class="form__error">
