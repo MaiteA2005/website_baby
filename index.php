@@ -16,12 +16,6 @@
   if($_SESSION['loggedin'] !== true){
     header('Location: login.php');
   }
-
-
-  //$result = $conn->query("SELECT * FROM products");
-  //$products = $result->fetch_all(MYSQLI_ASSOC);
-  //var_dump($products);
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +25,14 @@
   <link rel="stylesheet" href="css/stylesheet.index.css">
 </head>
 <body>
+<nav>
+  <ul>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="login.php">Login</a></li>
+    <li><a href="register.php">Register</a></li>
+  </ul>
+</nav>
+
   <div class="collection">
     <h1>Webshop</h1>
     <a href="logout.php" class="navbar__logout">Hi Stranger, logout?</a>
