@@ -6,16 +6,14 @@
         private $lastname;
 
 
-        /**
-         * Get the value of firstname
-         */ 
+        /Get the value of firstname
+        
         public function getFirstname()
         {
                 return $this->firstname;
         }
 
-        /**
-         * Set the value of firstname
+        /**Set the value of firstname
          *
          * @return  self
          */ 
@@ -26,9 +24,8 @@
                 return $this;
         }
 
-        /**
-         * Get the value of lastname
-         */ 
+        //Get the value of lastname
+          
         public function getLastname()
         {
                 return $this->lastname;
