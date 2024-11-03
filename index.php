@@ -26,28 +26,29 @@
 </head>
 <body>
 <nav>
+  <h2>Webshop</h2>
   <ul>
     <li><a href="index.php">Home</a></li>
-    <li class="dropdown">
-      <a href="javascript:void(0)" class="dropbtn">categoriën</a>
-      <div class="dropdown-content">
-      <a href="#">Category 1</a>
-      <a href="#">Category 2</a>
-      <a href="#">Category 3</a>
-      </div>
-    </li>
+    <li>
+    <div class="dropdown">
+    <a href="">
+      Categoriën
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="" class="dropdown-item">Kleren</a></li>
+      <li><a href="" class="dropdown-item" >Speelgoed</a></li>
+      <li><a href="" class="dropdown-item" >Eten en drinken</a></li>
+      <li><a href="" class="dropdown-item" >Slaaphulpjes</a></li>
+    </ul>
+  </div></li>
     <li><a href="">Zoeken</a></li>
     <li><a href="">Digital currency</a></li>
     <li><a href="">Favorieten</a></li>
     <li><a href="">Winkelmand</a></li>
-    <li><a href="">Profiel</a></li>
+    <li><a href="profiel.php">Profiel</a></li>
   </ul>
 </nav>
-
-  <div class="collection">
-    <h1>Webshop</h1>
-    <a href="logout.php" class="navbar__logout">Hi Stranger, logout?</a>
-  </div>
+  
   <?php foreach($products as $product): ?>
   <article>
     <h1><?php echo $product['title']?> : €<?php echo $product['price']?></h1>
