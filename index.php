@@ -22,18 +22,16 @@
   <meta charset="UTF-8">
   <title>Webshop 2XD</title>
   <link rel="stylesheet" href="css/stylesheet.css">
-  <link rel="stylesheet" href="css/stylesheet.index.css">
+  <link rel="stylesheet" href="css/style.index.css">
 </head>
 <body>
 <nav>
   <h2>Webshop</h2>
   <ul>
-    <li><a href="index.php">Home</a></li>
+    <li><a href="index.php" class='nav_text'>Home</a></li>
     <li>
     <div class="dropdown">
-    <a href="">
-      Categoriën
-    </a>
+    <a href="" class='nav_text'> Categoriën </a>
     <ul class="dropdown-menu">
       <li><a href="" class="dropdown-item">Kleren</a></li>
       <li><a href="" class="dropdown-item" >Speelgoed</a></li>
@@ -41,11 +39,13 @@
       <li><a href="" class="dropdown-item" >Slaaphulpjes</a></li>
     </ul>
   </div></li>
-    <li><a href="">Zoeken</a></li>
-    <li><a href="">Digital currency</a></li>
-    <li><a href="">Favorieten</a></li>
-    <li><a href="">Winkelmand</a></li>
-    <li><a href="">Profiel</a></li>
+  <div class="icons"></div>
+    <li><a href=""><img src="./images/zoeken.png" alt="Zoeken" ></a></li>
+    <li><a href=""><img src="./images/digital_currency.png" alt="Digital currency"></a></li>
+    <li><a href=""><img src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
+    <li><a href=""><img src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
+    <li><a href=""><img src="./images/user.png" alt="Profiel"></a></li>
+  </div>
   </ul>
 </nav>
   
