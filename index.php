@@ -45,7 +45,7 @@
     <li><a href="">Digital currency</a></li>
     <li><a href="">Favorieten</a></li>
     <li><a href="">Winkelmand</a></li>
-    <li><a href="profiel.php">Profiel</a></li>
+    <li><a href="">Profiel</a></li>
   </ul>
 </nav>
   
