@@ -28,8 +28,19 @@
 <nav>
   <ul>
     <li><a href="index.php">Home</a></li>
-    <li><a href="login.php">Login</a></li>
-    <li><a href="register.php">Register</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">categoriën</a>
+      <div class="dropdown-content">
+      <a href="#">Category 1</a>
+      <a href="#">Category 2</a>
+      <a href="#">Category 3</a>
+      </div>
+    </li>
+    <li><a href="">Zoeken</a></li>
+    <li><a href="">Digital currency</a></li>
+    <li><a href="">Favorieten</a></li>
+    <li><a href="">Winkelmand</a></li>
+    <li><a href="">Profiel</a></li>
   </ul>
 </nav>
 
