@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
 <body>
-    <form action="process_signup.php" method="post">
+    <form action="" method="post">
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" required><br>
 

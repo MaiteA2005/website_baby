@@ -1,52 +1,41 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "webshop";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$search = '';
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
-}
-
-$sql = "SELECT * FROM products WHERE name LIKE '%$search%'";
-$result = $conn->query($sql);
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Products</title>
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/style.index.css">
+    <title>Zoeken</title>
 </head>
 <body>
-    <h1>Search Products</h1>
+    <nav>
+    <ul>
+        <li><a href="index.php" class='nav_text'>Home</a></li>
+        <li>
+        <div class="dropdown">
+        <a href="" class='nav_text'> Categoriën </a>
+        <ul class="dropdown-menu">
+        <li><a href="" class="dropdown-item">Kleren</a></li>
+        <li><a href="" class="dropdown-item" >Speelgoed</a></li>
+        <li><a href="" class="dropdown-item" >Eten en drinken</a></li>
+        <li><a href="" class="dropdown-item" >Slaaphulpjes</a></li>
+        </ul>
+    </div></li>
+    <div class="icons"></div>
+        <li><a href="zoeken.php"><img src="./images/zoeken.png" alt="Zoeken" ></a></li>
+        <li><a href=""><img src="./images/digital_currency.png" alt="Digital currency"></a></li>
+        <li><a href=""><img src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
+        <li><a href=""><img src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
+        <li><a href="profiel.php"><img src="./images/user.png" alt="Profiel"></a></li>
+    </div>
+    </ul>
+    </nav>
+    <h1>Zoeken</h1>
     <form method="post" action="">
-        <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>">
-        <button type="submit">Search</button>
+        <input type="text" name="search" value="">
+        <button type="submit">Zoek</button>
     </form>
-
-    <?php
-    if ($result && $result->num_rows > 0) {
-        echo "<ul>";
-        while($row = $result->fetch_assoc()) {
-            echo "<li>" . htmlspecialchars($row['name']) . "</li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "No results found.";
-    }
-    ?>
-
-    <?php $conn->close(); ?>
 </body>
 </html>
