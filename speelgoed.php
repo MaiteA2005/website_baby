@@ -6,7 +6,6 @@
     <title>Speelgoed</title>
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/style.index.css">
-    <link rel="stylesheet" href="css/style.speelgoed.css">
 </head>
 <body>
     <nav>
@@ -31,74 +30,76 @@
         </div>
         </ul>
     </nav>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_1_blauw.jpg" alt="opbergzak">
-        <h2>Opbergzak</h2>
-        <p>Price: €36,95</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_groen.jpg" alt="Doudou konijn">
-        <h2>Doudou konijn</h2>
-        <p>Price: €10,16</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_3_roos.jpg" alt="Regenrammelaar ">
-        <h2>Regenrammelaar </h2>
-        <p>Price: €8,46</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_4.jpg" alt="Activiteitentafel ">
-        <h2>Activiteitentafel </h2>
-        <p>Price: €59,95</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Board Game">
-        <h2>Board Game</h2>
-        <p>Price: €20</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Action Figure">
-        <h2>Action Figure</h2>
-        <p>Price: €12</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Stuffed Animal">
-        <h2>Stuffed Animal</h2>
-        <p>Price: €18</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Remote Control Car">
-        <h2>Remote Control Car</h2>
-        <p>Price: €25</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Building Blocks">
-        <h2>Building Blocks</h2>
-        <p>Price: €22</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
-    </div>
-    <div class="article">
-        <img src="./images/producten_speelgoed/product_2_rood.jpg" alt="Toy Train">
-        <h2>Toy Train</h2>
-        <p>Price: €28</p>
-        <button>Add to Cart</button>
-        <button>View Details</button>
+    <div class="container">
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_1_blauw.jpg" alt="opbergzak">
+            <h2>Opbergzak</h2>
+            <p>Price: €36,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_2_groen.jpg" alt="Doudou konijn">
+            <h2>Doudou konijn</h2>
+            <p>Price: €10,16</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_3_roos.jpg" alt="Regenrammelaar ">
+            <h2>Regenrammelaar </h2>
+            <p>Price: €8,46</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_4.jpg" alt="Activiteitentafel ">
+            <h2>Activiteitentafel </h2>
+            <p>Price: €59,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_5_original.jpg" alt="Stapelpotjes">
+            <h2>Stapelpotjes</h2>
+            <p>Price: €14,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_6.jpg" alt="Loopfiets">
+            <h2>Loopfiets</h2>
+            <p>Price: €79,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_7.jpg" alt="Badspeelgoed">
+            <h2>Badspeelgoed</h2>
+            <p>Price: €14,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_8_A.jpg" alt="Houten activiteitenkubus">
+            <h2>Houten activiteitenkubus</h2>
+            <p>Price: €79,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_9.jpg" alt="Watertafel">
+            <h2>Watertafel</h2>
+            <p>Price: €80,00</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
+        <div class="article">
+            <img src="./images/producten_speelgoed/product_10.jpg" alt="zintuiglijke ballenset">
+            <h2>zintuiglijke ballenset</h2>
+            <p>Price: €22,95</p>
+            <button>Add to Cart</button>
+            <button>View Details</button>
+        </div>
     </div>
 </html>
