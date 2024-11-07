@@ -6,6 +6,7 @@
     <title>Speelgoed</title>
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/style.index.css">
+    <link rel="stylesheet" href="css/style.producten.css">
 </head>
 <body>
     <nav>

@@ -33,72 +33,72 @@
     </nav>
     <div class="container">
         <div class="article">
-            <img src="./images/producten_slaap/product_1.jpg" alt="Muziekdoosje ">
-            <h2>Muziekdoosje </h2>
-            <p>Price: €21,95</p>
+            <img src="./images/producten_eten&drinken/product_1_teddy.jpg" alt="Slab">
+            <h2>Slab</h2>
+            <p>Price: €14,48</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_2_roos.jpg" alt="Babynestje">
-            <h2>Babynestje</h2>
-            <p>Price: €79,95</p>
+            <img src="./images/producten_eten&drinken/product_2.jpg" alt="Mixer voor poedermelk">
+            <h2>Mixer voor poedermelk</h2>
+            <p>Price: €10,50</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_3.jpg" alt="Hartslagknuffel">
-            <h2>Hartslagknuffel</h2>
-            <p>Price: €39,95</p>
+            <img src="./images/producten_eten&drinken/product_3.jpg" alt="Starterset">
+            <h2>Starterset</h2>
+            <p>Price: €44,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_4.jpg" alt="Fopspeen + 0 maanden">
-            <h2>Fopspeen + 0 maanden</h2>
-            <p>Price: €10,95</p>
+            <img src="./images/producten_eten&drinken/product_4.jpg" alt="Doseerdoos voor poedermelk">
+            <h2>Doseerdoos voor poedermelk</h2>
+            <p>Price: €9,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_5.jpg" alt="Fopspeen + 0 maanden">
-            <h2>Fopspeen + 0 maanden</h2>
-            <p>Price: €10,95</p>
+            <img src="./images/producten_eten&drinken/product_5.jpg" alt="Droogrek">
+            <h2>Droogrek</h2>
+            <p>Price: €25,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_6.jpg" alt="Fopspeen 0 - 6 maanden ">
-            <h2>Fopspeen 0 - 6 maanden </h2>
-            <p>Price: €11,95</p>
+            <img src="./images/producten_eten&drinken/product_6_A.jpg" alt="Eetset 3-delig">
+            <h2>Eetset 3-delig</h2>
+            <p>Price: €22,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_7.jpg" alt="Fopspeen 0 - 6 maanden">
-            <h2>Fopspeen 0 - 6 maanden</h2>
-            <p>Price: €11,95</p>
+            <img src="./images/producten_eten&drinken/product_7_blauw.jpg" alt="Oefenbeker ">
+            <h2>Oefenbeker </h2>
+            <p>Price: €14,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_8.jpg" alt="Fopspeen 0 - 6 maanden">
-            <h2>Fopspeen 0 - 6 maanden </h2>
-            <p>Price: €11,95</p>
+            <img src="./images/producten_eten&drinken/product_8.jpg" alt="Bijtringen">
+            <h2>Bijtringen</h2>
+            <p>Price: €7,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_9_groen.jpg" alt="Slaapzak">
-            <h2>Slaapzak</h2>
-            <p>Price: €64,95</p>
+            <img src="./images/producten_eten&drinken/product_9.jpg" alt="Sterilisator voor microgolf">
+            <h2>Sterilisator voor microgolf</h2>
+            <p>Price: €37,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_slaap/product_10_wit.jpg" alt="teddybeer">
-            <h2>Teddybeer</h2>
-            <p>Price: €17,95</p>
+            <img src="./images/producten_eten&drinken/product_10.jpg" alt="Elektrische Flessenwarmer">
+            <h2>Elektrische Flessenwarmer</h2>
+            <p>Price: €46,99</p>
             <button>Add to Cart</button>
             <button>View Details</button>
         </div>
