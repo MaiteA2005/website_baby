@@ -34,10 +34,10 @@
       <div class="dropdown">
       <a href="" class='nav_text'> Categoriën </a>
       <ul class="dropdown-menu">
-        <li><a href="" class="dropdown-item">Kleren</a></li>
-        <li><a href="" class="dropdown-item" >Speelgoed</a></li>
-        <li><a href="" class="dropdown-item" >Eten en drinken</a></li>
-        <li><a href="" class="dropdown-item" >Slaaphulpjes</a></li>
+        <li><a href="kleren.php" class="dropdown-item">Kleren</a></li>
+        <li><a href="speelgoed.php" class="dropdown-item" >Speelgoed</a></li>
+        <li><a href="eten&drinken.php" class="dropdown-item" >Eten en drinken</a></li>
+        <li><a href="slaaphulpjes.php" class="dropdown-item" >Slaaphulpjes</a></li>
       </ul>
     </div></li>
     <div class="icons"></div>

@@ -1,12 +1,12 @@
 *{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: white;
 }
 
 body {
   display: flex;
   flex-direction: column;
   margin-left: 35px;
-  background-color: #e5f3f4;
 }
 
 nav ul {
