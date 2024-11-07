@@ -1,32 +1,39 @@
 <?php
-	function canLogin($p_email, $p_password){
-		if($p_email === 'maite@shop.com' && $p_password === "12345isnotsecure"){
-			return true;
-		}else{
-			return false;
+	function canLogIn($email,$password)
+	{
+		$conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
+		$statement = $conn->prepare("select * from user where email = :email");
+		$statement->bindValue(':email', $email);
+		$statement->execute();
+		$user = $statement->fetch();
+		if(!$user){
+		return false;
+		}
+
+		$hash = $user['password'];
+		if(password_verify($password, $hash)){
+		return true;
+		} else{
+		return false;
 		}
 	}
 
-	//wanneer inloggen
 	if(!empty($_POST)){
+		//er is verzonden
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		if (canLogin($email, $password)){
-			//oke
-			session_start();
-			$_SESSION['loggedin'] = true;
-			$_SESSION['email'] = $email;
-
-			header ("location: index.php");
+		if(canLogIn($email, $password)){
+		//login
+		session_start();
+		$_SESSION["email"] = $email;
+		header("Location: index.php");
+		exit();
 		} else{
-			//niet oke
-			$error = true;
+		//error
+		$error = true;
 		}
-		
 	}
-	
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +68,7 @@
 				<div class="form__field">
 					<input type="submit" value="Sign in" class="btn btn--primary">	
 				</div>
-                
+				
 			</form>
 		</div>
 	</div>
