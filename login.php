@@ -1,5 +1,32 @@
 <?php
-	function canLogIn($email,$password)
+	function canLogin($p_email, $p_password){
+		if($p_email === 'maite@shop.com' && $p_password === "12345"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	//wanneer inloggen
+	if(!empty($_POST)){
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+		if (canLogin($email, $password)){
+			//oke
+			session_start();
+			$_SESSION['loggedin'] = true;
+			$_SESSION['email'] = $email;
+
+			header ("location: index.php");
+		} else{
+			//niet oke
+			$error = true;
+		}
+		
+	}
+
+	/*function canLogIn($email,$password)
 	{
 		$conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
 		$statement = $conn->prepare("select * from user where email = :email");
@@ -28,12 +55,13 @@
 		session_start();
 		$_SESSION["email"] = $email;
 		header("Location: index.php");
-		exit();
 		} else{
 		//error
 		$error = true;
 		}
-	}
+	}*/
+	
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +96,7 @@
 				<div class="form__field">
 					<input type="submit" value="Sign in" class="btn btn--primary">	
 				</div>
-				
+                
 			</form>
 		</div>
 	</div>

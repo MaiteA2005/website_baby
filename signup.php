@@ -64,7 +64,7 @@
 					<label for="Password">Password</label>
 					<input type="password" name="password">
 				</div>
-
+                
                 <div class="form__field">
 					<label for="street_name">Street name</label>
 					<input type="text" name="street_name">
