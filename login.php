@@ -1,32 +1,5 @@
 <?php
-	function canLogin($p_email, $p_password){
-		if($p_email === 'maite@shop.com' && $p_password === "12345"){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	//wanneer inloggen
-	if(!empty($_POST)){
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-
-		if (canLogin($email, $password)){
-			//oke
-			session_start();
-			$_SESSION['loggedin'] = true;
-			$_SESSION['email'] = $email;
-
-			header ("location: index.php");
-		} else{
-			//niet oke
-			$error = true;
-		}
-		
-	}
-
-	/*function canLogIn($email,$password)
+	function canLogIn($email,$password)
 	{
 		$conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
 		$statement = $conn->prepare("select * from user where email = :email");
@@ -46,21 +19,21 @@
 	}
 
 	if(!empty($_POST)){
-		//er is verzonden
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		if(canLogIn($email, $password)){
-		//login
-		session_start();
-		$_SESSION["email"] = $email;
-		header("Location: index.php");
+		if (canLogin($email, $password)){
+			//oke
+			session_start();
+			$_SESSION['loggedin'] = true;
+			$_SESSION['email'] = $email;
+
+			header ("location: index.php");
 		} else{
-		//error
-		$error = true;
+			//niet oke
+			$error = true;
 		}
-	}*/
-	
+	}	
 
 ?><!DOCTYPE html>
 <html lang="en">
