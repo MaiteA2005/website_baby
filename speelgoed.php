@@ -96,8 +96,8 @@
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_speelgoed/product_10.jpg" alt="zintuiglijke ballenset">
-            <h2>zintuiglijke ballenset</h2>
+            <img src="./images/producten_speelgoed/product_10.jpg" alt="Sensorische ballenset">
+            <h2>Sensorische ballenset</h2>
             <p>Price: €22,95</p>
             <button>Add to Cart</button>
             <button>View Details</button>
