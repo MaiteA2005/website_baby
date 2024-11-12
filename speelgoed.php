@@ -9,7 +9,7 @@
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $conn->prepare("SELECT title, price, image, description, color, size FROM products");
+        $stmt = $conn->prepare("SELECT title, price, image, description, color FROM products WHERE categorie_id = '1'");
         $stmt->execute();
 
         // set the resulting array to associative
@@ -21,8 +21,7 @@
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -79,7 +78,6 @@
             }
         ?>
     </div>
-
     <script>
         function updateImage(title, color) {
             var images = <?php echo json_encode($products); ?>;
