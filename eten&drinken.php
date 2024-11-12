@@ -68,7 +68,7 @@
             <button>View Details</button>
         </div>
         <div class="article">
-            <img src="./images/producten_eten&drinken/product_6_A.jpg" alt="Eetset 3-delig">
+            <img src="./images/producten_eten&drinken/product_6_roos.jpg" alt="Eetset 3-delig">
             <h2>Eetset 3-delig</h2>
             <p>Price: €22,95</p>
             <button>Add to Cart</button>

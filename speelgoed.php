@@ -1,3 +1,27 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "webshop";
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->prepare("SELECT title, price, image, description, color, size FROM products");
+        $stmt->execute();
+
+        // set the resulting array to associative
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $products = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $products[$row['title']][] = $row;
+        }
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,96 +35,62 @@
 <body>
     <nav>
         <ul>
-        <li><a href="index.php" class='nav_text'>Home</a></li>
-        <li>
-        <div class="dropdown">
-        <a href="" class='nav_text'> Categoriën </a>
-        <ul class="dropdown-menu">
-            <li><a href="kleren.php" class="dropdown-item">Kleren</a></li>
-            <li><a href="speelgoed.php" class="dropdown-item" >Speelgoed</a></li>
-            <li><a href="eten&drinken.php" class="dropdown-item" >Eten en drinken</a></li>
-            <li><a href="slaaphulpjes.php" class="dropdown-item" >Slaaphulpjes</a></li>
-        </ul>
-        </div></li>
-        <div class="icons"></div>
-        <li><a href="zoeken.php"><img src="./images/zoeken.png" alt="Zoeken" ></a></li>
-        <li><a href=""><img src="./images/digital_currency.png" alt="Digital currency"></a></li>
-        <li><a href=""><img src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
-        <li><a href=""><img src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
-        <li><a href="profiel.php"><img src="./images/user.png" alt="Profiel"></a></li>
-        </div>
+            <li><a href="index.php" class='nav_text'>Home</a></li>
+            <li>
+                <div class="dropdown">
+                    <a href="" class='nav_text'> Categoriën </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="kleren.php" class="dropdown-item">Kleren</a></li>
+                        <li><a href="speelgoed.php" class="dropdown-item" >Speelgoed</a></li>
+                        <li><a href="eten&drinken.php" class="dropdown-item" >Eten en drinken</a></li>
+                        <li><a href="slaaphulpjes.php" class="dropdown-item" >Slaaphulpjes</a></li>
+                    </ul>
+                </div>
+            </li>
+            <div class="icons"></div>
+            <li><a href="zoeken.php"><img src="./images/zoeken.png" alt="Zoeken" ></a></li>
+            <li><a href=""><img src="./images/digital_currency.png" alt="Digital currency"></a></li>
+            <li><a href=""><img src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
+            <li><a href=""><img src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
+            <li><a href="profiel.php"><img src="./images/user.png" alt="Profiel"></a></li>
+            </div>
         </ul>
     </nav>
     <div class="container">
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_1_blauw.jpg" alt="opbergzak">
-            <h2>Opbergzak</h2>
-            <p>Price: €36,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_2_groen.jpg" alt="Doudou konijn">
-            <h2>Doudou konijn</h2>
-            <p>Price: €10,16</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_3_roos.jpg" alt="Regenrammelaar ">
-            <h2>Regenrammelaar </h2>
-            <p>Price: €8,46</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_4.jpg" alt="Activiteitentafel ">
-            <h2>Activiteitentafel </h2>
-            <p>Price: €59,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_5_original.jpg" alt="Stapelpotjes">
-            <h2>Stapelpotjes</h2>
-            <p>Price: €14,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_6.jpg" alt="Loopfiets">
-            <h2>Loopfiets</h2>
-            <p>Price: €79,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_7.jpg" alt="Badspeelgoed">
-            <h2>Badspeelgoed</h2>
-            <p>Price: €14,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_8_A.jpg" alt="Houten activiteitenkubus">
-            <h2>Houten activiteitenkubus</h2>
-            <p>Price: €79,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_9.jpg" alt="Watertafel">
-            <h2>Watertafel</h2>
-            <p>Price: €80,00</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
-        <div class="article">
-            <img src="./images/producten_speelgoed/product_10.jpg" alt="Sensorische ballenset">
-            <h2>Sensorische ballenset</h2>
-            <p>Price: €22,95</p>
-            <button>Add to Cart</button>
-            <button>View Details</button>
-        </div>
+        <?php
+            foreach($products as $title => $productGroup) {
+                $firstProduct = $productGroup[0];
+                echo '<div class="article">';
+                echo '<img class="foto" id="image-' . $title . '" src="./' . $firstProduct["image"] . '" alt="' . $firstProduct["title"] . '">';
+                echo '<h2>' . $firstProduct["title"] . '</h2>';
+                echo '<p>Price: €' . $firstProduct["price"] . '</p>';
+                if (count($productGroup) > 1) {
+                    echo '<label for="color-' . $title . '">Choose a color:</label>';
+                    echo '<select name="color" id="color-' . $title . '" onchange="updateImage(\'' . $title . '\', this.value)">';
+                    foreach ($productGroup as $product) {
+                        echo '<option value="' . $product["color"] . '">' . $product["color"] . '</option>';
+                    }
+                    echo '</select>';
+                }
+                echo '<button>Add to <img class="icon" src="./images/heart_not_clicked.png" alt="Favorieten"></button>';
+                echo '<button>Add to <img class="icon" src="./images/shopping-cart.png" alt="Winkelmand"></button>';
+                echo '<button>View Details</button>';
+                echo '</div>';
+            }
+        ?>
     </div>
+
+    <script>
+        function updateImage(title, color) {
+            var images = <?php echo json_encode($products); ?>;
+            var productGroup = images[title];
+            for (var i = 0; i < productGroup.length; i++) {
+                if (productGroup[i].color === color) {
+                    document.getElementById('image-' + title).src = './' + productGroup[i].image;
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
 </html>
