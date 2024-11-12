@@ -1,12 +1,6 @@
 <?php 
-  //'mysql:dbname=testdb;host=127.0.0.1'
-  //PDO connection
   $conn = new PDO('mysql:dbname=webshop;host=localhost', "root", "");
 
-  //databank connecten
-  //$conn = new mysqli('localhost' , 'root' , '' , 'webshop');
-
-  //select * from prod
   $statement = $conn->prepare("SELECT * FROM products");
   $statement->execute();
   $products = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -17,7 +11,7 @@
     header('Location: login.php');
   }
 
-  //<img src="images/<?= $product['image']" vraagteken> alt="<?= $product['name'] vraagteken> ">
+  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +19,7 @@
   <title>Webshop 2XD</title>
   <link rel="stylesheet" href="css/stylesheet.css">
   <link rel="stylesheet" href="css/style.index.css">
+  <link rel="stylesheet" href="css/style.producten.css">
 </head>
 <body>
   <nav>
@@ -49,18 +44,18 @@
     </div>
     </ul>
   </nav>
-  
+  <h1>Producten</h1>
   <div class="container">
-    <h1>Producten</h1>
-    <div class="products">
-      <?php foreach($products as $product): ?>
-        <div class="product">
-          
-          <h2><?= $product['title'] ?></h2>
-          <p><?= $product['description'] ?></p>
-          <p>&euro;<?= $product['price'] ?></p>
-          <a href="product.php?id=<?= $product['id'] ?>">Bekijk product</a>
-        </div>
+      <?php foreach($products as $product):
+          echo '<div class="article">';
+          echo '<img class="foto" id="image-' . '" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
+          echo '<h2>' . $product["title"] . '</h2>';
+          echo '<p>Price: €' . $product["price"] . '</p>';
+          echo '</br><button>Add to favorites</button>';
+          echo '</br><button>Add to cart</button>';
+          echo '</br><button>View Details</button>';
+          echo '</div>';
+      ?>  
       <?php endforeach; ?>
     </div>
   </div>

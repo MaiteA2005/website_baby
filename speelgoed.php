@@ -61,20 +61,20 @@
             foreach($products as $title => $productGroup) {
                 $firstProduct = $productGroup[0];
                 echo '<div class="article">';
-                echo '<img class="foto" id="image-' . $title . '" src="./' . $firstProduct["image"] . '" alt="' . $firstProduct["title"] . '">';
+                echo '<img  id="image-' . $title . '" src="./' . $firstProduct["image"] . '" alt="' . $firstProduct["title"] . '">';
                 echo '<h2>' . $firstProduct["title"] . '</h2>';
                 echo '<p>Price: €' . $firstProduct["price"] . '</p>';
                 if (count($productGroup) > 1) {
-                    echo '<label for="color-' . $title . '">Choose a color:</label>';
+                    echo '<label for="color-' . $title . '">Choose a color: </br> </label>';
                     echo '<select name="color" id="color-' . $title . '" onchange="updateImage(\'' . $title . '\', this.value)">';
                     foreach ($productGroup as $product) {
                         echo '<option value="' . $product["color"] . '">' . $product["color"] . '</option>';
                     }
                     echo '</select>';
                 }
-                echo '<button>Add to <img class="icon" src="./images/heart_not_clicked.png" alt="Favorieten"></button>';
-                echo '<button>Add to <img class="icon" src="./images/shopping-cart.png" alt="Winkelmand"></button>';
-                echo '<button>View Details</button>';
+                echo '</br><button>Add to favorites</button>';
+                echo '</br><button>Add to cart</button>';
+                echo '</br><button>View Details</button>';
                 echo '</div>';
             }
         ?>
