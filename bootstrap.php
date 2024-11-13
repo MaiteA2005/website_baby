@@ -5,8 +5,11 @@
         header("Location: login.php");
         exit;
     }    
+<<<<<<< HEAD
 
    //include autoload
    //include_once(__DIR__ . '/vendor/autoload.php');
+=======
+>>>>>>> 2006ca7 (update 3 13/11)
 
    //require_once __DIR__ . '/vendor/autoload.php';

@@ -1,10 +1,17 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php');   
+<<<<<<< HEAD
     require_once(__DIR__ . "/classes/Db.php");
 
     try {
         // create a new PDO connection using the Db class
         $conn = Db::getInstance();
+=======
+
+    try {
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+>>>>>>> 2006ca7 (update 3 13/11)
 
         $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = '1'");
         $stmt->execute();
@@ -33,7 +40,12 @@
     <?php include_once("nav.inc.php");?>
     <h1 class="title">Speelgoed</h1>
 
+<<<<<<< HEAD
     <div class="container"> 
+=======
+    <div class="container">
+        
+>>>>>>> 2006ca7 (update 3 13/11)
         <?php
             foreach($products as $title => $productGroup) {
                 $firstProduct = $productGroup[0];
@@ -42,7 +54,11 @@
                 echo '<h2>' . $firstProduct["title"] . '</h2>';
                 echo '<p>Prijs: €' . $firstProduct["price"] . '</p>';
                 if (count($productGroup) > 1) {
+<<<<<<< HEAD
                     echo '<label for="color-' . $title . '">Kies een kleur: </br> </label>';
+=======
+                    echo '<label for="color-' . $title . '">Choose a color: </br> </label>';
+>>>>>>> 2006ca7 (update 3 13/11)
                     echo '<select class="selector" name="color" id="color-' . $title . '" onchange="updateImage(\'' . $title . '\', this.value)">';
                     foreach ($productGroup as $product) {
                         echo '<option value="' . $product["color"] . '">' . $product["color"] . '</option>';

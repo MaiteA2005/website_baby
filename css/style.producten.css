@@ -5,7 +5,11 @@
   justify-content: space-between;
 }
 
+<<<<<<< HEAD
 h1 {
+=======
+h1{
+>>>>>>> 2006ca7 (update 3 13/11)
   margin: 20px 30px;
   font-size: 30px;
 }
@@ -25,7 +29,11 @@ h1 {
 
 .article img {
   width: 60%;
+<<<<<<< HEAD
   height: 50%;
+=======
+  height: 50%; 
+>>>>>>> 2006ca7 (update 3 13/11)
   object-fit: contain;
   border-radius: 5px;
 }
@@ -63,6 +71,7 @@ h1 {
   color: black;
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
 }
 
 label {
@@ -99,4 +108,6 @@ label {
     font-size: 0.9em;
     padding: 8px 12px;
   }
+=======
+>>>>>>> 2006ca7 (update 3 13/11)
 }
