@@ -1,7 +1,9 @@
 <?php
+    namespace Website\XD\Classes;
+
     include_once('Db.php');
 
-    class User{
+    abstract class User{
         private $title;
         private $description;
         private $price;
