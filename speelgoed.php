@@ -1,13 +1,7 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php');   
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "webshop";
-
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -37,9 +31,10 @@
 </head>
 <body>
     <?php include_once("nav.inc.php");?>
-    <h1>Speelgoed</h1>
+    <h1 class="title">Speelgoed</h1>
 
     <div class="container">
+        
         <?php
             foreach($products as $title => $productGroup) {
                 $firstProduct = $productGroup[0];
@@ -49,7 +44,7 @@
                 echo '<p>Price: €' . $firstProduct["price"] . '</p>';
                 if (count($productGroup) > 1) {
                     echo '<label for="color-' . $title . '">Choose a color: </br> </label>';
-                    echo '<select name="color" id="color-' . $title . '" onchange="updateImage(\'' . $title . '\', this.value)">';
+                    echo '<select class="selector" name="color" id="color-' . $title . '" onchange="updateImage(\'' . $title . '\', this.value)">';
                     foreach ($productGroup as $product) {
                         echo '<option value="' . $product["color"] . '">' . $product["color"] . '</option>';
                     }
@@ -57,7 +52,7 @@
                 }
                 echo '</br><button>Add to favorites</button>';
                 echo '</br><button>Add to cart</button>';
-                echo '</br><button>View Details</button>';
+                echo '</br><a href="details.php?title=' . urlencode($firstProduct["title"]) . '"><button>View Details</button></a>';
                 echo '</div>';
             }
         ?>

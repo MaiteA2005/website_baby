@@ -12,11 +12,11 @@
       </ul>
     </div></li>
     <div class="icons"></div>
-      <li><a href="zoeken.php"><img src="./images/zoeken.png" alt="Zoeken" ></a></li>
-      <li><a href=""><img src="./images/digital_currency.png" alt="Digital currency"></a></li>
-      <li><a href=""><img src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
-      <li><a href=""><img src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
-      <li><a href="profiel.php"><img src="./images/user.png" alt="Profiel"></a></li>
+      <li><a href="zoeken.php"><img class="icon" src="./images/zoeken.png" alt="Zoeken" ></a></li>
+      <li><a href=""><img class="icon" src="./images/digital_currency.png" alt="Digital currency"></a></li>
+      <li><a href=""><img class="icon" src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
+      <li><a href=""><img class="icon" src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
+      <li><a href="profiel.php"><img class="icon" src="./images/user.png" alt="Profiel"></a></li>
     </div>
     </ul>
   </nav>
