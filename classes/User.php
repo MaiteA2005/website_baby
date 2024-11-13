@@ -1,4 +1,5 @@
-<?php
+<?php 
+    namespace Website\XD\Classes;
     include_once('Db.php');
 
     class User{
@@ -14,14 +15,12 @@
 
 
         //Get the value of firstname
-        public function getFirstname()
-        {
+        public function getFirstname(){
             return $this->firstname;
         }
 
         //Set the value of firstname
-        public function setFirstname($firstname)
-        {
+        public function setFirstname($firstname){
             if(empty($firstname)){
                 throw new Exception('Firstname is required');
             }
@@ -31,14 +30,12 @@
         }
 
         //Get the value of lastname
-        public function getLastname()
-        {
+        public function getLastname(){
             return $this->lastname;
         }
 
         //Set the value of lastname
-        public function setLastname($lastname)
-        {
+        public function setLastname($lastname){
             if(empty($lastname)){
                 throw new Exception('Lastname is required');
             }
@@ -47,16 +44,13 @@
             return $this;
         }
     
-
         //Get the value of email
-        public function getEmail()
-        {
+        public function getEmail(){
             return $this->email;
         }
 
         //Set the value of email
-        public function setEmail($email)
-        {
+        public function setEmail($email){
             if(empty($email)){
                 throw new Exception('Email is required');
             }
@@ -66,14 +60,12 @@
         }
 
         //Get the value of password 
-        public function getPassword()
-        {
+        public function getPassword(){
             return $this->password;
         }
 
         //Set the value of password
-        public function setPassword($password)
-        {
+        public function setPassword($password){
             if(empty($password)){
                 throw new Exception('Password is required');
             }
@@ -84,14 +76,12 @@
         }
 
         //Get the value of street_name 
-        public function getStreet_name()
-        {
+        public function getStreet_name(){
             return $this->street_name;
         }
 
         //Set the value of street_name
-        public function setStreet_name($street_name)
-        {
+        public function setStreet_name($street_name){
             if(empty($street_name)){
                 throw new Exception('Street name is required');
             }
@@ -102,14 +92,12 @@
         }
 
         //Get the value of house_number
-        public function getHouse_number()
-        {
+        public function getHouse_number(){
             return $this->house_number;
         }
 
         //Set the value of house_number
-        public function setHouse_number($house_number)
-        {
+        public function setHouse_number($house_number){
             if(empty($house_number)){
                 throw new Exception('House number is required');
             }
@@ -120,14 +108,12 @@
         }
 
         //Get the value of postal_code
-        public function getPostal_code()
-        {
+        public function getPostal_code(){
             return $this->postal_code;
         }
 
         //Set the value of postal_code
-        public function setPostal_code($postal_code)
-        {
+        public function setPostal_code($postal_code){
             if(empty($postal_code)){
                 throw new Exception('Postal code is required');
             }
@@ -138,14 +124,12 @@
         }
 
         //Get the value of city 
-        public function getCity()
-        {
+        public function getCity(){
             return $this->city;
         }
 
         //Set the value of city
-        public function setCity($city)
-        {
+        public function setCity($city){
             if(empty($city)){
                 throw new Exception('City is required');
             }
@@ -156,14 +140,12 @@
         }
 
         //Get the value of country
-        public function getCountry()
-        {
+        public function getCountry(){
             return $this->country;
         }
 
         //Set the value of country
-        public function setCountry($country)
-        {
+        public function setCountry($country){
             if(empty($country)){
                 throw new Exception('Country is required');
             }
@@ -181,7 +163,7 @@
                 'lastname' => $this->getLastname()
             ]);
         }
-
+        
         public static function canLogin($email, $password){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE email = :email AND password = :password");

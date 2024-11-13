@@ -5,7 +5,7 @@
 body {
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
+  margin-left: 70px;
 }
 
 nav ul {
@@ -52,7 +52,7 @@ a {
 }
 
 .icons{
-  margin-left: 20%;
+  margin-left: 300px;
 }
 
 img{

@@ -10,14 +10,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Webshop 2XD</title>
-  <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="stylesheet" href="css/style.login.css">
   <link rel="stylesheet" href="css/style.index.css">
   <link rel="stylesheet" href="css/style.producten.css">
 </head>
 <body>
   <?php include_once("nav.inc.php");?>
   
-  <h1>Producten</h1>
   <div class="container">
       <?php foreach($products as $product):
           echo '<div class="article">';
@@ -32,10 +31,6 @@
       <?php endforeach; ?>
     </div>
   </div>
-  
-  <footer>
-    <p>&copy; 2024 - Maite Aldenkamp - 2XD</p>
-  </footer>
 
 </body>
 </html>

@@ -40,7 +40,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Webshop</title>
-  <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="stylesheet" href="css/style.login.css">
 </head>
 <body>
 	<div class="websiteLogin">
@@ -67,7 +67,7 @@
 				</div>
 
 				<div class="form__field">
-					<input type="submit" value="Sign in" class="btn btn--primary">	
+					<input type="submit" value="Log in" class="btn btn--primary">	
 				</div>
                 
 			</form>
