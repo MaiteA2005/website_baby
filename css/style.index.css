@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 70px;
+  margin-right: 70px;
 }
 
 nav ul {
@@ -56,7 +57,7 @@ a {
 }
 
 .icons{
-  padding-left: 30%;
+  padding-left: 40%;
 }
 
 .icon{

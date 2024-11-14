@@ -37,7 +37,7 @@ h1{
 
 .article p {
   font-size: 1.2em;
-  color: #555;
+  color: #3f3f3f;
 }
 
 .article button {
@@ -63,4 +63,9 @@ h1{
   color: black;
   display: flex;
   justify-content: center;
+}
+
+label {
+  font-size: 1.2em;
+  color: #3f3f3f;
 }
