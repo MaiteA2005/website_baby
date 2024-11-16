@@ -1,14 +1,15 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php'); 
-    
-    try {
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include_once(__DIR__ . '/classes/Product.php');
+    include_once(__DIR__ . '/classes/Db.php');
 
-        $stmt = $conn->prepare("SELECT title, price, image, description, color FROM products WHERE categorie_id = '4'");
+    try {
+        $db = new Db();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->prepare("SELECT * FROM products");
         $stmt->execute();
 
-        // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $products = [];
         foreach ($stmt->fetchAll() as $row) {
@@ -55,7 +56,17 @@
     </div>
     <script>
         function updateImage(title, color) {
-            var images = <?php echo json_encode($products); ?>;
+            var images = {
+                <?php
+                    foreach ($products as $title => $productGroup) {
+                        echo '"' . $title . '": [';
+                        foreach ($productGroup as $product) {
+                            echo '{color: "' . $product["color"] . '", image: "' . $product["image"] . '"},';
+                        }
+                        echo '],';
+                    }
+                ?>
+            };
             var productGroup = images[title];
             for (var i = 0; i < productGroup.length; i++) {
                 if (productGroup[i].color === color) {

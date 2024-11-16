@@ -56,7 +56,17 @@
 
     <script>
         function updateImage(title, color) {
-            var images = <?php echo json_encode($products); ?>;
+            var images = {
+                <?php
+                    foreach ($products as $title => $productGroup) {
+                        echo '"' . $title . '": [';
+                        foreach ($productGroup as $product) {
+                            echo '{color: "' . $product["color"] . '", image: "' . $product["image"] . '"},';
+                        }
+                        echo '],';
+                    }
+                ?>
+            };
             var productGroup = images[title];
             for (var i = 0; i < productGroup.length; i++) {
                 if (productGroup[i].color === color) {

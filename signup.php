@@ -6,6 +6,7 @@
         $options = [
             'cost' => 12,
         ];
+        
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
         $street_name = $_POST['street_name'];
         $house_number = $_POST['house_number'];

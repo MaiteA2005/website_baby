@@ -1,0 +1,21 @@
+button {
+    margin-top: 20px;
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #98d2f9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 1.2em;
+    color: #3f3f3f;
+}

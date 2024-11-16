@@ -1,9 +1,9 @@
 <?php
     namespace Website\XD\Classes;
 
-    include_once('Db.php');
+    include_once(__DIR__ .'Db.php');
 
-    abstract class User{
+    abstract class Product{
         private $title;
         private $description;
         private $price;
@@ -64,8 +64,7 @@
          *
          * @return  self
          */ 
-        public function setPrice($price)
-        {
+        public function setPrice($price){
             if(empty($price)){
                 throw new Exception('Price is required');
             }
@@ -133,5 +132,26 @@
             return $this;
         }
  
+        public function __construct($title, $price, $image, $description, $color) {
+            $this->title = $title;
+            $this->price = $price;
+            $this->image = $image;
+            $this->description = $description;
+            $this->color = $color;
+        }
+
+        public function getProductsByCategoryId($categoryId) {
+            $stmt = $this->conn->prepare("SELECT title, price, image, description, color FROM products WHERE categorie_id = :categoryId");
+            $stmt->bindParam(':categoryId', $categoryId);
+            $stmt->execute();
+    
+            $products = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $product = new Product($row['title'], $row['price'], $row['image'], $row['description'], $row['color']);
+                $products[$row['title']][] = $product;
+            }
+    
+            return $products;
+        }
 }
 ?>

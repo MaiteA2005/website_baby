@@ -1,6 +1,6 @@
 <?php
-    include_once("bootstrap.php");
-    // Initialize the PDO instance
+    include_once(__DIR__ ."/bootstrap.php");
+    
     $pdo = new PDO('mysql:dbname=webshop;host=localhost', "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/style.login.css">
     <link rel="stylesheet" href="css/style.index.css">
     <link rel="stylesheet" href="css/style.producten.css">
+    <link rel="stylesheet" href="css/style.details.css">
 </head>
 <body>
     <?php include_once("nav.inc.php");?>
@@ -31,11 +32,14 @@
         <?php
             echo '<div class="detailArtikel">';
             echo '<img class="detailFoto" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
-            echo '<h2 class="detailTitel">' . $product["title"] . '</h2>';
-            echo '<p class="detailTekst"> Prijs: €' . $product["price"] . '</p>';
-            echo '<p class="detailTekst"> Kleur: ' . $product["color"] . '</p>';
-            echo '<p class="detailTekst"> Categorie: ' . $categorie["name"] . '</p>';
-            echo '<p class="detailTekst"> Beschrijving: ' . $product["description"] . '</p>';
+            echo '<h2>' . $product["title"] . '</h2>';
+            echo '<p> Prijs: €' . $product["price"] . '</p>';
+            echo '<p> Kleur: ' . $product["color"] . '</p>';
+            echo '<p> Categorie: ' . $categorie["name"] . '</p>';
+            echo '<p> Beschrijving: ' . $product["description"] . '</p>';
+            echo '</br><button>Add to favorites</button>';
+            echo '</br><button>Add to cart</button>';
+            echo '</br><button>Go back</button>';
             echo '</div>';
         ?>
 </body>
