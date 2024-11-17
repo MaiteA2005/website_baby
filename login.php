@@ -1,24 +1,29 @@
 <?php
-	function canLogIn($email,$password)
-	{
-		$conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
-		$statement = $conn->prepare("select * from user where email = :email");
-		$statement->bindValue(':email', $email);
-		$statement->execute();
-		$user = $statement->fetch();
-		if(!$user){
-		return false;
-		}
+	require_once(__DIR__ . "/classes/User.php");
+	require_once(__DIR__ . "/classes/Db.php");
 
-		$hash = $user['password'];
-		if(password_verify($password, $hash)){
-		return true;
-		} else{
-		return false;
-		}
+	use Website\XD\Classes\User;
+
+	if (!class_exists('Website\XD\Classes\User')) {
+		die("User class not found");
 	}
 
-	if(!empty($_POST)){
+	if (!empty($_POST)) {
+		$user = new User();
+
+		$user->setEmail($_POST['email']);
+		$user->setPassword($_POST["password"]);
+
+		if ($user->canLogin($_POST['email'], $_POST['password'])) {
+			session_start();
+			$_SESSION['loggedin'] = true;
+			$_SESSION['email'] = $_POST['email'];
+			header("Location: index.php");
+		} else {
+			$error = true;
+		}
+	}
+	/*if(!empty($_POST)){
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
@@ -33,7 +38,7 @@
 			//niet oke
 			$error = true;
 		}
-	}	
+	}	*/
 
 ?><!DOCTYPE html>
 <html lang="en">

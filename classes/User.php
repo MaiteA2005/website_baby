@@ -1,6 +1,7 @@
 <?php 
     namespace Website\XD\Classes;
-    include_once(__DIR__ .'Db.php');
+
+    include_once(__DIR__ . "/Db.php");
 
     class User{
         private $firstname;
@@ -166,23 +167,26 @@
         
         public static function canLogin($email, $password){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
-            $statement->execute([
-                'email' => $email,
-                'password' => $password
-            ]);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $statement = $conn->prepare("select * from user where email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $user = $statement->fetch();
+            if(!$user){
+            return false;
+            }
 
-            if($user){
-                return true;
+            $hash = $user['password'];
+            if(password_verify($password, $hash)){
+            return true;
             } else{
-                return false;
+            return false;
             }
         }
 
         public static function isLoggedIn(){
             session_start();
             if($_SESSION['loggedin'] !== true){
+                $_SESSION['email'] = $_POST['email'];
                 header('Location: login.php');
             }
         }
