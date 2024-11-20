@@ -1,13 +1,12 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php'); 
-    include_once(__DIR__ . '/classes/Product.php');
-    include_once(__DIR__ . '/classes/Db.php');
+    require_once(__DIR__ . "/classes/Db.php");
 
     try {
-        $db = new Db();
-        $conn = $db->getConnection();
+        // create a new PDO connection using the Db class
+        $conn = Db::getInstance();
 
-        $stmt = $conn->prepare("SELECT * FROM products");
+        $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = '4'");
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

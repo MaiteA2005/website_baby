@@ -1,14 +1,14 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php'); 
+    require_once(__DIR__ . "/classes/Db.php");
 
     try {
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // create a new PDO connection using the Db class
+        $conn = Db::getInstance();
 
-        $stmt = $conn->prepare("SELECT title, price, image, description, color FROM products WHERE categorie_id = '3'");
+        $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = '3'");
         $stmt->execute();
 
-        // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $products = [];
         foreach ($stmt->fetchAll() as $row) {

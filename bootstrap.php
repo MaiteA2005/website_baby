@@ -6,4 +6,5 @@
         exit;
     }    
 
-    $conn = new PDO('mysql:dbname=webshop;host=localhost', "root", "");
+   //include autoload
+   //include_once(__DIR__ . '/vendor/autoload.php');

@@ -1,6 +1,9 @@
 <?php 
   include_once(__DIR__ . '/bootstrap.php');
+  include_once(__DIR__ . '/classes/Db.php');
   
+  // create a new PDO connection using the Db class
+  $conn = Db::getInstance();
   $statement = $conn->prepare("SELECT * FROM products");
   $statement->execute();
   $products = $statement->fetchAll(PDO::FETCH_ASSOC);

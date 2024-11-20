@@ -4,21 +4,24 @@
 
 	use Website\XD\Classes\User;
 
-	if (!class_exists('Website\XD\Classes\User')) {
-		die("User class not found");
-	}
-
 	if (!empty($_POST)) {
 		$user = new User();
 
 		$user->setEmail($_POST['email']);
 		$user->setPassword($_POST["password"]);
 
+		//inloggen als admin of user
 		if ($user->canLogin($_POST['email'], $_POST['password'])) {
 			session_start();
 			$_SESSION['loggedin'] = true;
 			$_SESSION['email'] = $_POST['email'];
-			header("Location: index.php");
+			
+			if($user->isAdmin($_POST['email'])){
+				header("Location: admin.dashboard.php");
+			} else {
+				header("Location: index.php");
+			}
+			exit();
 		} else {
 			$error = true;
 		}
@@ -76,6 +79,7 @@
 				</div>
                 
 			</form>
+			
 		</div>
 	</div>
 </body>

@@ -5,7 +5,7 @@
   justify-content: space-between;
 }
 
-h1{
+h1 {
   margin: 20px 30px;
   font-size: 30px;
 }
@@ -25,7 +25,7 @@ h1{
 
 .article img {
   width: 60%;
-  height: 50%; 
+  height: 50%;
   object-fit: contain;
   border-radius: 5px;
 }
@@ -68,4 +68,35 @@ h1{
 label {
   font-size: 1.2em;
   color: #3f3f3f;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .article {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .article {
+    flex: 1 1 calc(100% - 20px);
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 15px 20px;
+  }
+
+  .article h2 {
+    font-size: 1.2em;
+  }
+
+  .article p {
+    font-size: 1em;
+  }
+
+  .article button {
+    font-size: 0.9em;
+    padding: 8px 12px;
+  }
 }

@@ -140,18 +140,19 @@
             $this->color = $color;
         }
 
-        public function getProductsByCategoryId($categoryId) {
-            $stmt = $this->conn->prepare("SELECT title, price, image, description, color FROM products WHERE categorie_id = :categoryId");
-            $stmt->bindParam(':categoryId', $categoryId);
+
+        public static function getProductsByCategory($categoryId) {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = :categoryId");
+            $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
             $stmt->execute();
     
             $products = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $product = new Product($row['title'], $row['price'], $row['image'], $row['description'], $row['color']);
-                $products[$row['title']][] = $product;
+                $products[] = new Product($row['title'], $row['price'], $row['image'], $row['color']);
             }
     
             return $products;
         }
-}
+    }
 ?>

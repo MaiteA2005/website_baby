@@ -1,6 +1,7 @@
 <?php 
     namespace Website\XD\Classes;
 
+    use PDO;
     include_once(__DIR__ . "/Db.php");
 
     class User{
@@ -8,13 +9,13 @@
         private $lastname;
         private $email;
         private $password;
+        private $typeOfUser;
         private $street_name;
         private $house_number;
         private $postal_code;
         private $city;
         private $country;
-
-
+        
         //Get the value of firstname
         public function getFirstname(){
             return $this->firstname;
@@ -75,6 +76,20 @@
 
             return $this;
         }
+
+         //Get the value of typeOfUser
+         public function getTypeOfUser()
+         {
+                 return $this->typeOfUser;
+         }
+ 
+         //Set the value of typeOfUser @return  self
+         public function setTypeOfUser($typeOfUser)
+         {
+                 $this->typeOfUser = $typeOfUser;
+ 
+                 return $this;
+         }
 
         //Get the value of street_name 
         public function getStreet_name(){
@@ -172,14 +187,14 @@
             $statement->execute();
             $user = $statement->fetch();
             if(!$user){
-            return false;
+                return false;
             }
 
             $hash = $user['password'];
             if(password_verify($password, $hash)){
-            return true;
+                return true;
             } else{
-            return false;
+                return false;
             }
         }
 
@@ -191,10 +206,53 @@
             }
         }
 
-        public static function logout(){
-            session_start();
-            session_destroy();
-            header('Location: login.php');
+        //Check if user is admin
+        // als typeOfUser = admin redirecten naar admin.index.php
+        public static function isAdmin($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select * from user where email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $user = $statement->fetch();
+            if($user['typeOfUser'] == 'admin'){
+                header('Location: admin.index.php');
+            } else{
+                header('Location: index.php');
+            }
         }
-}
+
+        //maak een functie voor de sign up
+        public static function signUp(){
+       
+        $first_name = $_POST['first_name']; 
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $options = [
+            'cost' => 12,
+        ];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
+        $street_name = $_POST['street_name'];
+        $house_number = $_POST['house_number'];
+        $postal_code = $_POST['postal_code'];
+        $city = $_POST['city'];
+        $country = $_POST['country'];
+    
+        $conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
+        $query = $conn->prepare("insert into user (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
+        values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
+
+        $query->bindValue(':firstname', $first_name);
+        $query->bindValue(':lastname', $last_name);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':password', $password);
+        $query->bindValue(':streetname', $street_name);
+        $query->bindValue(':housenumber', $house_number);
+        $query->bindValue(':postalcode', $postal_code);
+        $query->bindValue(':city', $city);
+        $query->bindValue(':country', $country);
+
+        $query->execute();
+        header("location: login.php");
+        }
+    }
 ?>

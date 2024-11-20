@@ -2,5 +2,5 @@
     session_start();
     session_destroy();
 
-    header("Location: login.php"); // redirecten naar login pagina
+    header("Location: login.php"); // redirecten naar login <pagina></pagina>
 ?>

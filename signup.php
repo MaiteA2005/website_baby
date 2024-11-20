@@ -1,35 +1,25 @@
 <?php
-    if(!empty($_POST)){
-        $first_name = $_POST['first_name']; 
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $options = [
-            'cost' => 12,
-        ];
-        
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
-        $street_name = $_POST['street_name'];
-        $house_number = $_POST['house_number'];
-        $postal_code = $_POST['postal_code'];
-        $city = $_POST['city'];
-        $country = $_POST['country'];
-    
-        $conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
-        $query = $conn->prepare("insert into user (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
-        values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
+    require_once(__DIR__ . "/classes/User.php");
+    require_once(__DIR__ . "/classes/Db.php");
 
-        $query->bindValue(':firstname', $first_name);
-        $query->bindValue(':lastname', $last_name);
-        $query->bindValue(':email', $email);
-        $query->bindValue(':password', $password);
-        $query->bindValue(':streetname', $street_name);
-        $query->bindValue(':housenumber', $house_number);
-        $query->bindValue(':postalcode', $postal_code);
-        $query->bindValue(':city', $city);
-        $query->bindValue(':country', $country);
+    use Website\XD\Classes\User;
 
-        $query->execute();
-        header("location: login.php");
+    if (!empty($_POST)) {
+        $user = new User();
+
+        $user->setFirstname($_POST['first_name']);
+        $user->setLastname($_POST['last_name']);
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->setStreet_name($_POST['street_name']);
+        $user->setHouse_number($_POST['house_number']);
+        $user->setPostal_code($_POST['postal_code']);
+        $user->setCity($_POST['city']);
+        $user->setCountry($_POST['country']);
+
+        $user->signUp();
+
+        header("Location: login.php");
     }
 ?><!DOCTYPE html>
 <html lang="en">
