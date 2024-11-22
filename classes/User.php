@@ -1,8 +1,8 @@
 <?php 
     namespace Website\XD\Classes;
-
-    use PDO;
     include_once(__DIR__ . "/Db.php");
+    use PDO;
+    
 
     class User{
         private $firstname;
@@ -198,13 +198,13 @@
             }
         }
 
-        public static function isLoggedIn(){
+        /*public static function isLoggedIn(){
             session_start();
             if($_SESSION['loggedin'] !== true){
                 $_SESSION['email'] = $_POST['email'];
                 header('Location: login.php');
             }
-        }
+        }*/
 
         //Check if user is admin
         // als typeOfUser = admin redirecten naar admin.index.php
@@ -224,35 +224,35 @@
         //maak een functie voor de sign up
         public static function signUp(){
        
-        $first_name = $_POST['first_name']; 
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $options = [
-            'cost' => 12,
-        ];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
-        $street_name = $_POST['street_name'];
-        $house_number = $_POST['house_number'];
-        $postal_code = $_POST['postal_code'];
-        $city = $_POST['city'];
-        $country = $_POST['country'];
-    
-        $conn = new PDO('mysql:host=localhost;dbname=webshop', "root","");
-        $query = $conn->prepare("insert into user (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
-        values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
+            $first_name = $_POST['first_name']; 
+            $last_name = $_POST['last_name'];
+            $email = $_POST['email'];
+            $options = [
+                'cost' => 12,
+            ];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
+            $street_name = $_POST['street_name'];
+            $house_number = $_POST['house_number'];
+            $postal_code = $_POST['postal_code'];
+            $city = $_POST['city'];
+            $country = $_POST['country'];
+        
+            $conn = Db::getConnection();
+            $query = $conn->prepare("insert into user (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
+            values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
 
-        $query->bindValue(':firstname', $first_name);
-        $query->bindValue(':lastname', $last_name);
-        $query->bindValue(':email', $email);
-        $query->bindValue(':password', $password);
-        $query->bindValue(':streetname', $street_name);
-        $query->bindValue(':housenumber', $house_number);
-        $query->bindValue(':postalcode', $postal_code);
-        $query->bindValue(':city', $city);
-        $query->bindValue(':country', $country);
+            $query->bindValue(':firstname', $first_name);
+            $query->bindValue(':lastname', $last_name);
+            $query->bindValue(':email', $email);
+            $query->bindValue(':password', $password);
+            $query->bindValue(':streetname', $street_name);
+            $query->bindValue(':housenumber', $house_number);
+            $query->bindValue(':postalcode', $postal_code);
+            $query->bindValue(':city', $city);
+            $query->bindValue(':country', $country);
 
-        $query->execute();
-        header("location: login.php");
+            $query->execute();
+            header("location: login.php");
         }
     }
 ?>

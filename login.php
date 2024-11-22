@@ -17,7 +17,7 @@
 			$_SESSION['email'] = $_POST['email'];
 			
 			if($user->isAdmin($_POST['email'])){
-				header("Location: admin.dashboard.php");
+				header("Location: admin.index.php");
 			} else {
 				header("Location: index.php");
 			}
@@ -26,22 +26,6 @@
 			$error = true;
 		}
 	}
-	/*if(!empty($_POST)){
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-
-		if (canLogin($email, $password)){
-			//oke
-			session_start();
-			$_SESSION['loggedin'] = true;
-			$_SESSION['email'] = $email;
-
-			header ("location: index.php");
-		} else{
-			//niet oke
-			$error = true;
-		}
-	}	*/
 
 ?><!DOCTYPE html>
 <html lang="en">
