@@ -19,7 +19,7 @@
 </head>
 <body>
   <?php include_once("nav.inc.php");?>
-  
+
   <div class="container">
       <?php foreach($products as $product):
           echo '<div class="article">';

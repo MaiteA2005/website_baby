@@ -16,10 +16,12 @@
 			$_SESSION['loggedin'] = true;
 			$_SESSION['email'] = $_POST['email'];
 			
-			if($user->isAdmin($_POST['email'])){
-				header("Location: admin.index.php");
+			//check if user is admin
+			//if user is admin redirect to admin.index.php
+			if ($user->isAdmin($_POST['email'])) {
+				header('Location: admin.index.php');
 			} else {
-				header("Location: index.php");
+				header('Location: index.php');
 			}
 			exit();
 		} else {

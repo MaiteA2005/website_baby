@@ -1,0 +1,50 @@
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+.container{
+    padding-left: 5%;
+}
+
+.form__field
+{
+padding-bottom: 1em;
+}
+
+.form__field label
+{
+display: block;
+margin-bottom: 0.2em;
+}
+
+.form__field .label__inline
+{
+display: inline-block;
+}
+
+.form__field input[type=text], 
+.form__field input[type=number], 
+.form__field input[type=category] 
+{
+  width: 70%;
+  padding: 0.05em;
+  font-size: 1.4em;
+}
+
+.btn
+{
+    width: 70%;
+    margin: 0.5em auto;
+}
+
+.btn--primary
+{
+    background-color: rgb(118, 184, 247);
+    color: white;
+    text-align: center;
+    border: none;
+    padding: 0.3em 2em;
+    font-size: 1.4em;
+    border-radius: 5px;
+}
+  

@@ -198,13 +198,13 @@
             }
         }
 
-        /*public static function isLoggedIn(){
+        public static function isLoggedIn(){
             session_start();
             if($_SESSION['loggedin'] !== true){
                 $_SESSION['email'] = $_POST['email'];
                 header('Location: login.php');
             }
-        }*/
+        }
 
         //Check if user is admin
         // als typeOfUser = admin redirecten naar admin.index.php
@@ -216,8 +216,27 @@
             $user = $statement->fetch();
             if($user['typeOfUser'] == 'admin'){
                 header('Location: admin.index.php');
+                exit();
             } else{
                 header('Location: index.php');
+                exit(); 
+            }
+        }
+
+        //user mag geen toegan hebben tot admin.index.php
+        //als typeOfUser = user redirecten naar index.php
+        public static function isUser($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select * from user where email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $user = $statement->fetch();
+            if($user['typeOfUser'] == 'user'){
+                header('Location: index.php');
+                exit();
+            } else{
+                header('Location: admin.index.php');
+                exit(); 
             }
         }
 
