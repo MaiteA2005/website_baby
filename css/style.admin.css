@@ -1,0 +1,13 @@
+a {
+    display: inline-block;
+}
+
+button {
+    display: inline-block;
+    width: 80%;
+}
+
+button img {
+    vertical-align: middle;
+    max-width: 15%;
+}

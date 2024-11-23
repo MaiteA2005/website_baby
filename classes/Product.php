@@ -132,12 +132,13 @@
             return $this;
         }
  
-        public function __construct($title, $price, $image, $description, $color) {
+        public function __construct($title, $price, $image, $description, $color, $categorie_id) {
             $this->title = $title;
             $this->price = $price;
             $this->image = $image;
             $this->description = $description;
             $this->color = $color;
+            $this->catagory = $categorie_id;
         }
 
 

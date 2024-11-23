@@ -1,26 +1,44 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php');
     include_once(__DIR__ . '/classes/Db.php');
+    include_once(__DIR__ . '/classes/User.php');
     
-    // create a new PDO connection using the Db class
     $conn = \Website\XD\Classes\Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM products");
-    $statement->execute();
-    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if (isset($_GET['id'])) {
+        $productId = $_GET['id'];
+        $statement = $conn->prepare("SELECT * FROM products WHERE id = ?");
+        $statement->bindValue(1, $productId, PDO::PARAM_INT); 
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $product = $statement->fetch();
+        if ($product) {
+            echo "<script>
+                document.getElementById('title').value = '" . addslashes($product['title']) . "';
+                document.getElementById('description').value = '" . addslashes($product['description']) . "';
+                document.getElementById('price').value = '" . addslashes($product['price']) . "';
+                document.getElementById('category').value = '" . addslashes(isset($product['category']) ? $product['category'] : '') . "';
+                document.getElementById('color').value = '" . addslashes($product['color']) . "';
+            </script>";
+        } else {
+            echo "Product not found.";
+        }
+        $statement = null;
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product toevoegen</title>
+    <title>Product Bewerken</title>
     <link rel="stylesheet" href="css/style.nav.admin.css">
     <link rel="stylesheet" href="css/style.dashboard.css">
 </head>
 <body>
     <?php include_once("admin.nav.inc.php");?>
 
-  <div class='container'>
-    <h2>Artikel toevoegen</h2>
+    <div class='container'>
+    <h2>Artikel bewerken</h2>
     <form action="" method="post">
         <div class="form__field">
             <label class="form__field" for="title"><h3>Titel:</h3></label>
@@ -58,10 +76,9 @@
         </div>
 
         <div class="form__field">
-            <input type="submit" value="Toevoegen" class="btn btn--primary">
+            <input type="submit" value="Bewerken" class="btn btn--primary">
         </div>
         </form>
   </div>
-
 </body>
 </html>

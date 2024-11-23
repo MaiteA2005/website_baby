@@ -18,37 +18,18 @@
     <link rel="stylesheet" href="css/style.login.css">
     <link rel="stylesheet" href="css/style.nav.admin.css">
     <link rel="stylesheet" href="css/style.producten.css">
+    <link rel="stylesheet" href="css/style.admin.css">
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="admin.index.php" class='nav_text'>Home</a></li>
-      <li>
-      <div class="dropdown">
-      <a href="" class='nav_text'> Producten </a>
-      <ul class="dropdown-menu">
-        <li><a href="admin.dashboard.php" class="dropdown-item">Toevoegen</a></li>
-        <li><a href="" class="dropdown-item" >Verwijderen of bewerken</a></li>
-      </ul>
-    </div></li>
-    <div class="icons"></div>
-        <li><a href="admin.dashboard.php"><img class="icon" src="./images/add.png" alt="Toevoegen" ></a></li>
-        <li><a href=""><img class="icon" src="./images/bewerken.png" alt="Bewerken"></a></li>
-        <li><a href=""><img class="icon" src="./images/delete.png" alt="Verwijder"></a></li>
-        <li><a href="profiel.php"><img class="icon" src="./images/user.png" alt="Profiel"></a></li>
-    </div>
-    </ul>
-  </nav>
-    
+  <?php include_once("admin.nav.inc.php");?>
   <div class="container">
       <?php foreach($products as $product):
           echo '<div class="article">';
           echo '<img class="foto" id="image-' . '" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
           echo '<h2>' . $product["title"] . '</h2>';
           echo '<p>Price: €' . $product["price"] . '</p>';
-          echo '</br><button>Add to favorites</button>';
-          echo '</br><button>Add to cart</button>';
-          echo '</br><button>View Details</button>';
+          echo '<a href="admin.bewerken.php?id=' . $product["id"] . '"><button><img class="bewerken" src="./images/bewerken.png" alt="Bewerken"></button></a>';
+          echo '<a href="delete.php?id=' . $product["id"] . '"><button><img class="delete" src="./images/delete.png" alt="Verwijder"></button></a>';
           echo '</div>';
       ?>  
       <?php endforeach; ?>
