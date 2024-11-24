@@ -1,17 +1,10 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php'); 
-<<<<<<< HEAD
     require_once(__DIR__ . "/classes/Db.php");
 
     try {
-        // create a new PDO connection using the Db class
-        $conn = Db::getInstance();
-=======
-
-    try {
-        // set the PDO error mode to exception
+        $conn = \Website\XD\Classes\Db::getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
->>>>>>> 2006ca7 (update 3 13/11)
 
         $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = '3'");
         $stmt->execute();

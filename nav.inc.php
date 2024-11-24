@@ -1,4 +1,5 @@
-<nav>
+<div class="achtergrondNav">
+  <nav>
     <ul>
       <li><a href="index.php" class='nav_text'>Home</a></li>
       <li>
@@ -13,10 +14,10 @@
     </div></li>
     <div class="icons"></div>
       <li><a href="zoeken.php"><img class="icon" src="./images/zoeken.png" alt="Zoeken" ></a></li>
-      <li><a href=""><img class="icon" src="./images/digital_currency.png" alt="Digital currency"></a></li>
-      <li><a href=""><img class="icon" src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
-      <li><a href=""><img class="icon" src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
-      <li><a href="profiel.php"><img class="icon" src="./images/user.png" alt="Profiel"></a></li>
+      <li><a href="favorieten.php"><img class="icon" src="./images/heart_not_clicked.png" alt="Favorieten"></a></li>
+      <li><a href="winkelmand.php"><img class="icon" src="./images/shopping-cart.png" alt="Winkelmand"></a></li>
+      <li><a href="user.profiel.php"><img class="icon" src="./images/user.png" alt="Profiel"></a></li>
     </div>
     </ul>
   </nav>
+</div>
