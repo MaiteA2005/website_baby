@@ -15,8 +15,6 @@
     $categorieStmt->execute(['id' => $categorieId]);
     $categorie = $categorieStmt->fetch();
 
-    include_once("bootstrap.php");
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -45,9 +43,7 @@
             echo '<p> Beschrijving: ' . $product["description"] . '</p>';
             echo '</br><button>Add to favorites</button>';
             echo '</br><button>Add to cart</button>';
-            echo '</br><button>Go back</button>';
             echo '</div>';
         ?>
-
 </body>
 </html>

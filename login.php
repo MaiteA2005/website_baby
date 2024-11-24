@@ -21,7 +21,7 @@
 			if ($user->isAdmin($_POST['email'])) {
 				header('Location: admin.index.php');
 			} else {
-				header('Location: index.php');
+				header('Location: user.index.php');
 			}
 			exit();
 		} else {
