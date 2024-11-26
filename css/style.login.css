@@ -2,8 +2,7 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.websiteLogin
-{
+.websiteLogin{
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
@@ -12,17 +11,16 @@
   align-items: center;
 }
 
-.form--login
-{
+.form--login{
   background-color: #F3F3F3;
   padding: 1em;
   color: #505050;
   grid-column: form;
   grid-row: form;
+  border-radius: 0.5em;
 }
 
-.form__error
-{
+.form__error{
   background-color: #ecbdf8;
   color: white;
   font-weight: lighter;
@@ -31,42 +29,61 @@
   font-size: 0.9em;
 }
 
-.form__field
-{
+.form__field{
   padding-bottom: 1em;
 }
 
-.form__field label
-{
+.form__field label{
   display: block;
   margin-bottom: 0.2em;
 }
 
-.form__field .label__inline
-{
+.form__field .label__inline{
   display: inline-block;
 }
 
 .form__field input[type=text], 
-.form__field input[type=password] 
-{
+.form__field input[type=email], 
+.form__field input[type=password] {
   width: 100%;
   padding: 0.05em;
   font-size: 1.4em;
 }
 
-.btn
-{
+.btn{
   width: 100%;
   margin: 0.5em auto;
 }
 
-.btn--primary
-{
+.btn--primary{
   background-color: #a3dbf1 ;
   color: white;
   text-align: center;
   border: none;
   padding: 0.3em 2em;
   font-size: 1.4em;
+}
+
+.btn--primary:hover{
+  background-color: #ecbdf8;
+}
+
+.form__titles{
+  display: flex;
+  gap: 1em;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+a{
+  color: #505050;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #ecbdf8;
+} 
+
+.active{
+ text-decoration: underline 3px #ecbdf8;
 }

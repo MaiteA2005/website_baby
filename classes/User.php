@@ -2,9 +2,11 @@
     namespace Website\XD\Classes;
     include_once(__DIR__ . "/Db.php");
     use PDO;
+    use Exception;
     
 
     class User{
+        private $id;
         private $firstname;
         private $lastname;
         private $email;
@@ -16,6 +18,22 @@
         private $city;
         private $country;
         
+        //Get the value of id
+        public function getId(){
+            return $this->id;
+        }
+
+        //Set the value of id
+        public function setId($id){
+            if(empty($id)){
+                throw new Exception('ID is required');
+            }
+            $this->id = $id;
+
+            return $this;
+        }
+
+        //Get the value of firstname
         //Get the value of firstname
         public function getFirstname(){
             return $this->firstname;
@@ -182,7 +200,7 @@
         
         public static function canLogin($email, $password){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select * from user where email = :email");
+            $statement = $conn->prepare("select * from users where email = :email");
             $statement->bindValue(':email', $email);
             $statement->execute();
             $user = $statement->fetch();
@@ -210,7 +228,7 @@
         // als typeOfUser = admin redirecten naar admin.index.php
         public static function isAdmin($email){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select * from user where email = :email");
+            $statement = $conn->prepare("select * from users where email = :email");
             $statement->bindValue(':email', $email);
             $statement->execute();
             $user = $statement->fetch();
@@ -218,7 +236,7 @@
                 header('Location: admin.index.php');
                 exit();
             } else{
-                header('Location: index.php');
+                header('Location: user.index.php');
                 exit(); 
             }
         }
@@ -227,12 +245,12 @@
         //als typeOfUser = user redirecten naar index.php
         public static function isUser($email){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("select * from user where email = :email");
+            $statement = $conn->prepare("select * from users where email = :email");
             $statement->bindValue(':email', $email);
             $statement->execute();
             $user = $statement->fetch();
             if($user['typeOfUser'] == 'user'){
-                header('Location: index.php');
+                header('Location: user.index.php');
                 exit();
             } else{
                 header('Location: admin.index.php');
@@ -257,7 +275,7 @@
             $country = $_POST['country'];
         
             $conn = Db::getConnection();
-            $query = $conn->prepare("insert into user (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
+            $query = $conn->prepare("insert into users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
             values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
 
             $query->bindValue(':firstname', $first_name);
@@ -273,5 +291,23 @@
             $query->execute();
             header("location: login.php");
         }
-    }
+
+        // functie om gegevens te wijzigen
+        public function update(){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, street_name = :street_name, house_number = :house_number, postal_code = :postal_code, city = :city, country = :country WHERE id = :id");
+            $statement->execute([
+                'firstname' => $this->getFirstname(),
+                'lastname' => $this->getLastname(),
+                'email' => $this->getEmail(),
+                'password' => $this->getPassword(),
+                'street_name' => $this->getStreet_name(),
+                'house_number' => $this->getHouse_number(),
+                'postal_code' => $this->getPostal_code(),
+                'city' => $this->getCity(),
+                'country' => $this->getCountry(),
+                'id' => $this->getId()
+            ]);
+        }
+    }    
 ?>

@@ -1,0 +1,1 @@
+<h2>Mijn digital currency</h2>

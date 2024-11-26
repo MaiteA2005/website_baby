@@ -13,7 +13,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Webshop 2XD</title>
-  <link rel="stylesheet" href="css/style.login.css">
   <link rel="stylesheet" href="css/style.index.css">
   <link rel="stylesheet" href="css/style.producten.css">
 </head>
@@ -28,12 +27,19 @@
           echo '<p>Price: €' . $product["price"] . '</p>';
           echo '</br><button>Add to favorites</button>';
           echo '</br><button>Add to cart</button>';
-          echo '</br><button>View Details</button>';
+          echo '</br><form action="details.php" method="GET">';
+          echo '<input type="hidden" name="id" value="' . $product["id"] . '">';
+          echo '<button type="submit">View Details</button>';
+          echo '</form>';
           echo '</div>';
       ?>  
       <?php endforeach; ?>
     </div>
   </div>
+
+  <footer>
+    <a class="terug" href="user.index.php">Go back</a>
+  </footer>
 
 </body>
 </html>

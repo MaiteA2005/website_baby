@@ -1,17 +1,26 @@
 <?php
-
     include_once(__DIR__ ."/bootstrap.php");
+    require_once(__DIR__ . "/classes/Db.php");
     
-    $pdo = new PDO('mysql:dbname=webshop;host=localhost', "root", "");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = \Website\XD\Classes\Db::getConnection();
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $title = $_GET['title'];
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE title = :title");
-    $stmt->execute(['title' => $title]);
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    if ($id === null) {
+        echo '<p>ID is not set. Please provide a product ID in the URL.</p>';
+        exit;
+    }
+
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
+    $stmt->execute(['id' => $id]);
     $product = $stmt->fetch();
 
+    if (!$product) {
+        die('Product not found.');
+    }
+
     $categorieId = $product["categorie_id"];
-    $categorieStmt = $pdo->prepare("SELECT name FROM categories WHERE id = :id");
+    $categorieStmt = $conn->prepare("SELECT name FROM categories WHERE id = :id");
     $categorieStmt->execute(['id' => $categorieId]);
     $categorie = $categorieStmt->fetch();
 
@@ -22,7 +31,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details</title>
-    <link rel="stylesheet" href="css/style.login.css">
     <link rel="stylesheet" href="css/style.index.css">
     <link rel="stylesheet" href="css/style.producten.css">
     <link rel="stylesheet" href="css/style.details.css">

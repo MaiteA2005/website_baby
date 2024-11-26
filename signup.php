@@ -33,53 +33,54 @@
     <div class="websiteLogin">
 		<div class="form form--login">
 			<form action="" method="post">
-				<h2 form__title><a href="login.php">Log in</a></h2>
-				<h2 form__title>Sign up</h2>
-
+			<div class="form__titles">
+					<h2 class="form__title"><a href="login.php">Log in</a></h2>
+					<h2 class="form__title"><a class="active" href="signup.php">Sign up</a></h2>
+				</div>
 				<div class="form__field">
 					<label for="first_name">First Name</label>
-					<input type="text" name="first_name" required>
+					<input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
 				</div>
-                
+				
 				<div class="form__field">
 					<label for="last_name">Last Name</label>
-					<input type="text" name="last_name">
-				</div>
-
-                <div class="form__field">
-					<label for="Email">Email</label>
-					<input type="text" name="email">
+					<input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
 				</div>
 
 				<div class="form__field">
-					<label for="Password">Password</label>
-					<input type="password" name="password">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" autocomplete="email" required>
 				</div>
-                
-                <div class="form__field">
+
+				<div class="form__field">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" autocomplete="new-password" required>
+				</div>
+				
+				<div class="form__field">
 					<label for="street_name">Street name</label>
-					<input type="text" name="street_name">
-                </div>
+					<input type="text" id="street_name" name="street_name" autocomplete="address-line1">
+				</div>
 
 				<div class="form__field">
 					<label for="house_number">House number</label>
-					<input type="text" name="house_number">
-                </div>
+					<input type="text" id="house_number" name="house_number" autocomplete="address-line2">
+				</div>
 
-                <div class="form__field">
+				<div class="form__field">
 					<label for="postal_code">Postal code</label>
-					<input type="text" name="postal_code">
-                </div>
+					<input type="text" id="postal_code" name="postal_code" autocomplete="postal-code">
+				</div>
 
 				<div class="form__field">
 					<label for="city">City</label>
-					<input type="text" name="city">
+					<input type="text" id="city" name="city" autocomplete="address-level2">
 				</div>
 
-                <div class="form__field">
+				<div class="form__field">
 					<label for="country">Country</label>
-					<input type="text" name="country">
-                </div>
+					<input type="text" id="country" name="country" autocomplete="country">
+				</div>
 
 				<div class="form__field">
 					<input type="submit" value="Sign up" class="btn btn--primary">	

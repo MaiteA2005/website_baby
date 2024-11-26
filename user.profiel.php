@@ -15,65 +15,32 @@
     <h1>Profiel Pagina</h1>
     <div class="sidebar">
         <ul class="sidebar__menu">
-            <li><a href="#">Mijn gegevens</a></li>
-            <li><a href="#">Bestellingen</a></li>
-            <li><a href="#">Digital currency</a></li>
+            <?php $page = isset($_GET['page']) ? $_GET['page'] : 'mijn_gegevens'; ?>
+            <li><a href="user.profiel.php?page=mijn_gegevens">Mijn gegevens</a></li>
+            <li><a href="user.profiel.php?page=bestellingen">Bestellingen</a></li>
+            <li><a href="user.profiel.php?page=digital_currency">Digital currency</a></li>
             <li><a href="logout.php">Uitloggen</a></li>
         </ul>
     </div>
-    <div class="form form--login">
-			<form action="" method="post">
-				<div class="form__field">
-					<label for="first_name">First Name</label>
-					<input type="text" name="first_name" required>
-				</div>
-                
-				<div class="form__field">
-					<label for="last_name">Last Name</label>
-					<input type="text" name="last_name">
-				</div>
 
-                <div class="form__field">
-					<label for="Email">Email</label>
-					<input type="text" name="email">
-				</div>
-
-				<div class="form__field">
-					<label for="Password">Password</label>
-					<input type="password" name="password">
-				</div>
-                
-                <div class="form__field">
-					<label for="street_name">Street name</label>
-					<input type="text" name="street_name">
-                </div>
-
-				<div class="form__field">
-					<label for="house_number">House number</label>
-					<input type="text" name="house_number">
-                </div>
-
-                <div class="form__field">
-					<label for="postal_code">Postal code</label>
-					<input type="text" name="postal_code">
-                </div>
-
-				<div class="form__field">
-					<label for="city">City</label>
-					<input type="text" name="city">
-				</div>
-
-                <div class="form__field">
-					<label for="country">Country</label>
-					<input type="text" name="country">
-                </div>
-
-				<div class="form__field">
-					<input type="submit" value="Bewerken" class="btn btn--primary">	
-				</div>
-                
-			</form>
-		</div>
-	</div>
+    <div class="content">
+        <?php
+        // Laad dynamisch inhoud op basis van de waarde van `page`
+        switch ($page) {
+            case 'mijn_gegevens':
+                include_once("user.profiel.mijn_gegevens.php");
+                break;
+            case 'bestellingen':
+                include_once("user.profiel.bestellingen.php");
+                break;
+            case 'digital_currency':
+                include_once("user.profiel.digital_currency.php");
+                break;
+            default:
+                include_once("user.profiel.mijn_gegevens.php");
+                break;
+        }
+        ?>
+    </div>
 </body>
 </html>

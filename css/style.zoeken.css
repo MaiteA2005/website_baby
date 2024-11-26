@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 20px 30px;
+    font-size: 30px;
+    text-align: center;
+}
+  
+.form__field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form__field input[type=text] {
+    flex: 1;
+    padding: 0.1em;
+    font-size: 1.4em;
+}
+
+button {
+    margin-top: 20px;
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #a3dbf1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #f8b4f9;
+}
+
+.article {
+    flex: 1 1 calc(50% - 20px);
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.article img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.article h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.article p {
+    font-size: 1.2em;
+    color: #3f3f3f;
+}

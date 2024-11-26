@@ -4,7 +4,7 @@
 
 	use Website\XD\Classes\User;
 
-	if (!empty($_POST)) {
+	if (!empty($_POST) && !empty($_POST['email']) && !empty($_POST['password'])) {
 		$user = new User();
 
 		$user->setEmail($_POST['email']);
@@ -27,8 +27,7 @@
 		} else {
 			$error = true;
 		}
-	}
-
+	} 
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,8 +39,10 @@
 	<div class="websiteLogin">
 		<div class="form form--login">
 			<form action="" method="post">
-				<h2 form__title>Log In</h2>
-				<h2 form__title><a href="signup.php">Sign up</a></h2>
+				<div class="form__titles">
+					<h2 class="form__title"><a class="active" href="login.php">Log in</a></h2>
+					<h2 class="form__title"><a href="signup.php">Sign up</a></h2>
+				</div>
 
 				<?php if(isset($error)): ?>
 				<div class="form__error">
@@ -52,12 +53,12 @@
 				<?php endif; ?>
 
 				<div class="form__field">
-					<label for="Email">Email</label>
-					<input type="text" name="email">
+					<label for="email">Email</label>
+					<input type="text" id="email" name="email" autocomplete="email" required>
 				</div>
 				<div class="form__field">
-					<label for="Password">Password</label>
-					<input type="password" name="password">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" autocomplete="current-password" required>
 				</div>
 
 				<div class="form__field">
