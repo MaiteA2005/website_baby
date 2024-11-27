@@ -237,7 +237,7 @@
                 header('Location: admin.index.php');
                 exit();
             } else{
-                header('Location: user.index.php');
+                header('Location: index.php');
                 exit(); 
             }
         }
@@ -251,7 +251,7 @@
             $statement->execute();
             $user = $statement->fetch();
             if($user['typeOfUser'] == 'user'){
-                header('Location: user.index.php');
+                header('Location: index.php');
                 exit();
             } else{
                 header('Location: admin.index.php');
