@@ -1,12 +1,12 @@
 <?php 
-  include_once(__DIR__ . '/bootstrap.php');
-  include_once(__DIR__ . '/classes/Db.php');
+    // include the bootstrap
+    require_once(__DIR__ . '/bootstrap.php');
   
-  // create a new PDO connection using the Db class
-  $conn = \Website\XD\Classes\Db::getConnection();
-  $statement = $conn->prepare("SELECT * FROM products");
-  $statement->execute();
-  $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    // create a new PDO connection using the Db class
+    $conn = \Website\XD\Classes\Db::getConnection();
+    $statement = $conn->prepare("SELECT * FROM products");
+    $statement->execute();
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
   
 ?><!DOCTYPE html>
 <html lang="en">
