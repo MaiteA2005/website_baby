@@ -38,7 +38,7 @@
   </div>
 
   <footer>
-    <a class="terug" href="user.index.php">Go back</a>
+    <a class="terug" href="index.php">Go back</a>
   </footer>
 
 </body>
