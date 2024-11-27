@@ -1,7 +1,7 @@
 <div class="achtergrondNav">
   <nav>
     <ul>
-      <li><a href="user.index.php" class='nav_text'>Home</a></li>
+      <li><a href="index.php" class='nav_text'>Home</a></li>
       <li>
       <div class="dropdown">
       <a href="" class='nav_text'> Categoriën </a>
