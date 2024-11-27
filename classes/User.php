@@ -196,6 +196,7 @@
                 'firstname' => $this->getFirstname(),
                 'lastname' => $this->getLastname()
             ]);
+
         }
         
         public static function canLogin($email, $password){
