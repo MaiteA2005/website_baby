@@ -48,10 +48,16 @@
             echo '<p> Prijs: €' . $product["price"] . '</p>';
             echo '<p> Kleur: ' . $product["color"] . '</p>';
             echo '<p> Categorie: ' . $categorie["name"] . '</p>';
-            echo '<p> Beschrijving: ' . $product["description"] . '</p>';
+            if (!empty($product["description"])) {
+                echo '<p> Beschrijving: ' . $product["description"] . '</p>';
+            }
             echo '</br><button>Add to favorites</button>';
             echo '</br><button>Add to cart</button>';
             echo '</div>';
         ?>
+    </div>
+    <div class="reviews">
+        
+    </div>
 </body>
 </html>

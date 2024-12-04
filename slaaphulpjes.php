@@ -1,7 +1,6 @@
 <?php
     include_once(__DIR__ . '/bootstrap.php'); 
     require_once(__DIR__ . "/classes/Db.php");
-
     
     try {
         $conn = \Website\XD\Classes\Db::getConnection();

@@ -1,12 +1,14 @@
 <?php 
-    // include the bootstrap
-    require_once(__DIR__ . '/bootstrap.php');
+    require_once(__DIR__ . "/classes/User.php");
+    require_once(__DIR__ . "/classes/Db.php");
   
     // create a new PDO connection using the Db class
     $conn = \Website\XD\Classes\Db::getConnection();
     $statement = $conn->prepare("SELECT * FROM products");
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    \Website\XD\Classes\User::isLoggedIn();
   
 ?><!DOCTYPE html>
 <html lang="en">
@@ -25,16 +27,14 @@
           echo '<img class="foto" id="image-' . '" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
           echo '<h2>' . $product["title"] . '</h2>';
           echo '<p>Price: €' . $product["price"] . '</p>';
-          echo '</br><button>Add to favorites</button>';
           echo '</br><button>Add to cart</button>';
-          echo '</br><form action="details.php" method="GET">';
+          echo '<form action="details.php" method="GET">';
           echo '<input type="hidden" name="id" value="' . $product["id"] . '">';
           echo '<button type="submit">View Details</button>';
           echo '</form>';
           echo '</div>';
       ?>  
       <?php endforeach; ?>
-    </div>
   </div>
 
   <footer>

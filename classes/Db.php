@@ -12,13 +12,14 @@
             //Db :: getConnection();
             if(self::$conn == null){
                 try{
-                    $host = "junction.proxy.rlwy.net";
+                    /*$host = "junction.proxy.rlwy.net";
                     $dbname = "webshop";
                     $user = "root";
                     $pass = "OjNOfIRAMXFBTyIgNhbvmwPhrehxAyqH";
                     $port = "19872";
 
-                    self::$conn = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $user, $pass);
+                    self::$conn = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $user, $pass);*/
+                    self::$conn = new PDO('mysql:host=localhost;dbname=webshop', 'root', '');
                     self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     return self::$conn;
                 } catch(PDOException $e){

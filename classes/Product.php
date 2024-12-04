@@ -10,7 +10,7 @@
         private $categorie_id;
         private $color;
         private $image;
-
+        private $is_favorite;
         
 
         // Get the value of title 
@@ -131,6 +131,26 @@
 
             return $this;
         }
+
+        /**
+         * Get the value of is_favorite
+         */ 
+        public function getIs_favorite()
+        {
+                return $this->is_favorite;
+        }
+
+        /**
+         * Set the value of is_favorite
+         *
+         * @return  self
+         */ 
+        public function setIs_favorite($is_favorite)
+        {
+                $this->is_favorite = $is_favorite;
+
+                return $this;
+        }
  
         public function __construct($title, $price, $image, $description, $color, $categorie_id) {
             $this->title = $title;
@@ -141,7 +161,7 @@
             $this->catagory = $categorie_id;
         }
 
-
+        //functie om producten te halen obv de categorie
         public static function getProductsByCategory($categoryId) {
             $conn = Db::getInstance();
             $stmt = $conn->prepare("SELECT * FROM products WHERE categorie_id = :categoryId");
@@ -155,5 +175,35 @@
     
             return $products;
         }
+
+        /*function add to cart
+        public function addToCart($productId) {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("INSERT INTO cart (product_id, user_id) VALUES (:productId, :userId)");
+            $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+            $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        //function add to favorites
+        public function addToFavorites($productId) {
+            $conn = Db::getInstance();
+            if ($this->Is_favorite($productId)==true) {
+                //add to favorites
+                $stmt = $conn->prepare("INSERT INTO favorites (product_id, user_id) VALUES (:productId, :userId)");
+                $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+                $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+                $stmt->execute();
+            } else {
+                //remove from favorites
+                $stmt = $conn->prepare("DELETE FROM favorites WHERE product_id = :productId AND user_id = :userId");
+                $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+                $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+                $stmt->execute();
+            }
+            
+        }*/
+
+
     }
 ?>

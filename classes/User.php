@@ -219,9 +219,9 @@
 
         public static function isLoggedIn(){
             session_start();
-            if($_SESSION['loggedin'] !== true){
-                $_SESSION['email'] = $_POST['email'];
+            if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                 header('Location: login.php');
+                exit();
             }
         }
 

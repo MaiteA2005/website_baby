@@ -13,9 +13,8 @@
             }
             echo '</select>';
         }
-        echo '</br><button>Add to favorites</button>';
         echo '</br><button>Add to cart</button>';
-        echo '</br><a id="details-link-' . $title . '" href="details.php?id=' . urlencode($firstProduct["id"]) . '"><button>View Details</button></a>';
+        echo '<a id="details-link-' . $title . '" href="details.php?id=' . urlencode($firstProduct["id"]) . '"><button>View Details</button></a>';
         echo '</div>';
     }
 ?>

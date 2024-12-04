@@ -45,9 +45,8 @@
                     echo '<img class="foto" id="image-' . '" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
                     echo '<h2>' . $product["title"] . '</h2>';
                     echo '<p>Price: €' . $product["price"] . '</p>';
-                    echo '</br><button>Add to favorites</button>';
                     echo '</br><button>Add to cart</button>';
-                    echo '</br><button>View Details</button>';
+                    echo '<button>View Details</button>';
                     echo '</div>';
                 }
             } else {
