@@ -10,6 +10,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 //include autoload
-//require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 //autoload classes
+spl_autoload_register(function ($class_name) {
+    $file = __DIR__ . '/../' . str_replace('\\', '/', $class_name) . '.php';
+    if (file_exists($file)) {
+        include $file;
+    }
+});

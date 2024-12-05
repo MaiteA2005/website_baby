@@ -1,6 +1,7 @@
 <?php
-    include_once(__DIR__ . '/bootstrap.php');   
-    require_once(__DIR__ . "/classes/Db.php");
+    require_once (__DIR__ . '/bootstrap.php'); // Adjust the path if necessary
+    require_once(__DIR__ . '/classes/Db.php');
+
     $conn = \Website\XD\Classes\Db::getConnection();
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

@@ -218,7 +218,9 @@
         }
 
         public static function isLoggedIn(){
-            session_start();
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
                 header('Location: login.php');
                 exit();
@@ -310,5 +312,25 @@
                 'id' => $this->getId()
             ]);
         }
+
+        //functie om user te krijgen door de id (getUserId)
+        /*public static function getUserId($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+            $statement->execute(['id' => $id]);
+            return $statement->fetch();
+        }*/
+
+        public static function getUserId($conn) {
+            $statement = $conn->prepare("SELECT firstname FROM users WHERE id = :id");
+            $statement->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);        
+            $statement->execute();        
+            $user = $statement->fetch(PDO::FETCH_ASSOC);        
+            if ($user === false) {
+                return null;
+            }
+            return $user['id'];
+        }
+        
     }    
 ?>

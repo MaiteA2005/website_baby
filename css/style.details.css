@@ -19,3 +19,38 @@ p {
     font-size: 1.2em;
     color: #3f3f3f;
 }
+
+.reviews{
+    justify-content: space-between;
+    margin: 0 5%;
+}
+
+button {
+    margin-top: 20px;
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #a3dbf1 ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #f8b4f9;
+}
+  
+p{
+    font-size: 1.2em;
+    color: #3f3f3f;
+    padding: 5px 0px;
+}
+
+.review{
+    border: #3f3f3f solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 40%;
+}
