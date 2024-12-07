@@ -35,7 +35,6 @@
         }
 
         //Get the value of firstname
-        //Get the value of firstname
         public function getFirstname(){
             return $this->firstname;
         }
@@ -282,22 +281,34 @@
             }
         }
 
+        //Check if email already exists
+        public static function emailExists($email) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            return $statement->fetchColumn() > 0;
+        }
+
         //maak een functie voor de sign up
         public static function signUp(){
-       
             $first_name = $_POST['first_name']; 
             $last_name = $_POST['last_name'];
             $email = $_POST['email'];
             $options = [
                 'cost' => 12,
             ];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT,$options);
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
             $street_name = $_POST['street_name'];
             $house_number = $_POST['house_number'];
             $postal_code = $_POST['postal_code'];
             $city = $_POST['city'];
             $country = $_POST['country'];
-        
+
+            if (self::emailExists($email)) {
+                throw new Exception('Email already exists');
+            }
+
             $conn = Db::getConnection();
             $query = $conn->prepare("insert into users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
             values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");

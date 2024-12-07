@@ -7,25 +7,38 @@
 	if (!empty($_POST) && !empty($_POST['email']) && !empty($_POST['password'])) {
 		$user = new User();
 
-		$user->setEmail($_POST['email']);
-		$user->setPassword($_POST["password"]);
+		$email = $_POST['email'];
+		$password = $_POST['password'];
 
-		//inloggen als admin of user
-		if ($user->canLogin($_POST['email'], $_POST['password'])) {
-			session_start();
-			$_SESSION['loggedin'] = true;
-			$_SESSION['email'] = $_POST['email'];
-			
-			//check if user is admin
-			//if user is admin redirect to admin.index.php
-			if ($user->isAdmin($_POST['email'])) {
-				header('Location: admin.index.php');
+		// Check for duplicate email
+		if ($user->emailExists($email)) {
+			$error = "This email is already registered.";
+		} 
+		// Check for duplicate password
+		elseif ($user->passwordExists($password)) {
+			$error = "This password is already in use. Please choose a different password.";
+		} 
+		
+		else {
+			$user->setEmail($email);
+			$user->setPassword($password);
+
+			// Log in as admin or user
+			if ($user->canLogin($email, $password)) {
+				session_start();
+				$_SESSION['loggedin'] = true;
+				$_SESSION['email'] = $email;
+				
+				// Check if user is admin
+				if ($user->isAdmin($email)) {
+					header('Location: admin.index.php');
+				} else {
+					header('Location: index.php');
+				}
+				exit();
 			} else {
-				header('Location: index.php');
+				$error = "Sorry, we can't log you in with that email address and password. Can you try again?";
 			}
-			exit();
-		} else {
-			$error = true;
 		}
 	} 
 ?><!DOCTYPE html>
@@ -47,7 +60,7 @@
 				<?php if(isset($error)): ?>
 				<div class="form__error">
 					<p>
-						Sorry, we can't log you in with that email address and password. Can you try again?
+						<?php echo $error; ?>
 					</p>
 				</div>
 				<?php endif; ?>
@@ -64,7 +77,7 @@
 				<div class="form__field">
 					<input type="submit" value="Log in" class="btn btn--primary">	
 				</div>
-                
+				
 			</form>
 			
 		</div>

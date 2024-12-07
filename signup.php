@@ -7,19 +7,8 @@
     if (!empty($_POST)) {
         $user = new User();
 
-        $user->setFirstname($_POST['first_name']);
-        $user->setLastname($_POST['last_name']);
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setStreet_name($_POST['street_name']);
-        $user->setHouse_number($_POST['house_number']);
-        $user->setPostal_code($_POST['postal_code']);
-        $user->setCity($_POST['city']);
-        $user->setCountry($_POST['country']);
-
-        $user->signUp();
-
-        header("Location: login.php");
+		User::signUp();
+        
     }
 ?><!DOCTYPE html>
 <html lang="en">
