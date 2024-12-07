@@ -7,30 +7,26 @@
 	if (!empty($_POST) && !empty($_POST['email']) && !empty($_POST['password'])) {
 		$user = new User();
 
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-	}
-		
-		else {
-			$user->setEmail($email);
-			$user->setPassword($password);
+		$user->setEmail($_POST['email']);
+		$user->setPassword($_POST["password"]);
 
-			// Log in as admin or user
-			if ($user->canLogin($email, $password)) {
-				session_start();
-				$_SESSION['loggedin'] = true;
-				$_SESSION['email'] = $email;
-				
-				// Check if user is admin
-				if ($user->isAdmin($email)) {
-					header('Location: admin.index.php');
-				} else {
-					header('Location: index.php');
-				}
-				exit();
+		//inloggen als admin of user
+		if ($user->canLogin($_POST['email'], $_POST['password'])) {
+			session_start();
+			$_SESSION['loggedin'] = true;
+			$_SESSION['email'] = $_POST['email'];
+			
+			//check if user is admin
+			//if user is admin redirect to admin.index.php
+			if ($user->isAdmin($_POST['email'])) {
+				header('Location: admin.index.php');
 			} else {
-				$error = "Sorry, we can't log you in with that email address and password. Can you try again?";
+				header('Location: index.php');
 			}
+			exit();
+		} else {
+			$error = true;
+		}
 	} 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -51,7 +47,7 @@
 				<?php if(isset($error)): ?>
 				<div class="form__error">
 					<p>
-						<?php echo $error; ?>
+						Sorry, we can't log you in with that email address and password. Can you try again?
 					</p>
 				</div>
 				<?php endif; ?>
@@ -68,7 +64,7 @@
 				<div class="form__field">
 					<input type="submit" value="Log in" class="btn btn--primary">	
 				</div>
-				
+                
 			</form>
 			
 		</div>

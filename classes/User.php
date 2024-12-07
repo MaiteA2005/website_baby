@@ -290,15 +290,6 @@
             return $statement->fetchColumn() > 0;
         }
 
-        //Check if password already exists
-        public static function passwordExists($password) {
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT COUNT(*) FROM users WHERE password = :password");
-            $statement->bindValue(':password', $password);
-            $statement->execute();
-            return $statement->fetchColumn() > 0;
-        }
-
         //maak een functie voor de sign up
         public static function signUp(){
             $first_name = $_POST['first_name']; 
@@ -313,6 +304,10 @@
             $postal_code = $_POST['postal_code'];
             $city = $_POST['city'];
             $country = $_POST['country'];
+
+            if (self::emailExists($email)) {
+                throw new Exception('Email already exists');
+            }
 
             $conn = Db::getConnection();
             $query = $conn->prepare("insert into users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
