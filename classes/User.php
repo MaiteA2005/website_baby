@@ -290,6 +290,15 @@
             return $statement->fetchColumn() > 0;
         }
 
+        //Check if password already exists
+        public static function passwordExists($password) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) FROM users WHERE password = :password");
+            $statement->bindValue(':password', $password);
+            $statement->execute();
+            return $statement->fetchColumn() > 0;
+        }
+
         //maak een functie voor de sign up
         public static function signUp(){
             $first_name = $_POST['first_name']; 
@@ -307,6 +316,12 @@
 
             if (self::emailExists($email)) {
                 throw new Exception('Email already exists');
+                echo "Email already exists";
+            }
+
+            if(self::passwordExists($password)){
+                throw new Exception('Password already exists');
+                echo "Password already exists";
             }
 
             $conn = Db::getConnection();
