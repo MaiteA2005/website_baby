@@ -1,5 +1,5 @@
 <?php
-    require_once (__DIR__ . '/bootstrap.php'); // Adjust the path if necessary
+    include_once (__DIR__ . '/bootstrap.php'); // Adjust the path if necessary
     require_once(__DIR__ . '/classes/Db.php');
 
     $conn = \Website\XD\Classes\Db::getConnection();
