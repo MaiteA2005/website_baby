@@ -48,7 +48,7 @@
       <div class="article">
         <img class="foto" id="image-<?php echo $product["id"]; ?>" src="./<?php echo $product["image"]; ?>" alt="<?php echo $product["title"]; ?>">
         <h2><?php echo $product["title"]; ?></h2>
-        <p>Price: €<?php echo $product["price"]; ?></p>
+        <p>Price: €<?php echo $product["price"]; ?></p></br>
         <form method="POST" action="">
           <input type="hidden" name="product_id" value="<?php echo $product["id"]; ?>">
           <button type="submit" name="add_to_cart">Add to cart</button>

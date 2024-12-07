@@ -24,6 +24,14 @@
     $categorieStmt = $conn->prepare("SELECT name FROM categories WHERE id = :id");
     $categorieStmt->execute(['id' => $categorieId]);
     $categorie = $categorieStmt->fetch();
+  
+    $email = $_SESSION['email'];
+
+    // Fetch user data from the database
+    $query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $query->bindValue(1, $email, PDO::PARAM_STR);
+    $query->execute();
+    $user = $query->fetch(PDO::FETCH_ASSOC);
 
     //haal alle reviews uit de databank die al bestaan
     $reviews = (new \Website\XD\Classes\Review())->getReviews($id);
@@ -34,6 +42,7 @@
         $review->setProduct($id);
         $review->setRating($_POST['rating']);
         $review->setComment($_POST['review']);
+        $review->setUserId($user['id']);
         $review->save();
         header("Location: details.php?id=" . $id);
     }
@@ -64,8 +73,8 @@
             if (!empty($product["description"])) {
                 echo '<p> Beschrijving: ' . $product["description"] . '</p>';
             }
-            echo '</br><button>Add to favorites</button>';
             echo '</br><button>Add to cart</button>';
+            echo '</br><button onclick="history.back()">Go Back</button>';
             echo '</div>';
         ?>
     </div>
@@ -88,7 +97,9 @@
         <?php
             if ($reviews) {
                 foreach ($reviews as $review) {
-                    $username = (new \Website\XD\Classes\Review())->getUsername($review['user_id']);
+                    $usernameStmt = $conn->prepare("SELECT firstname FROM users WHERE id = ?");
+                    $usernameStmt->execute([$review['user_id']]);
+                    $username = $usernameStmt->fetch(PDO::FETCH_ASSOC);
                     echo '<div class="review">';
                     if ($username) {
                         echo '<p>Name: ' . $username['firstname'] . '</p>';

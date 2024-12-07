@@ -5,27 +5,27 @@ include_once(__DIR__ . "/Db.php");
 
 class Review
 {
-    private $user;
+    private $userId;
     private $product;
     private $rating;
     private $comment;
 
-    /**
-     * Get the value of user
+     /**
+     * Get the value of user_id
      */ 
-    public function getUser()
+    public function getUserId()
     {
-        return $this->user;
+        return $this->userId;
     }
 
     /**
-     * Set the value of user
+     * Set the value of user_id
      *
      * @return  self
      */ 
-    public function setUser($user)
+    public function setUserId($userId)
     {
-        $this->user = $user;
+        $this->userId = $userId;
 
         return $this;
     }
@@ -104,7 +104,7 @@ class Review
     {
         $conn = Db::getConnection();
         $statement = $conn->prepare("INSERT INTO reviews (user_id, product_id, rating, comment) VALUES (:user, :product, :rating, :comment)");
-        $user = $this->getUsername($this->getUser());
+        $user = $this->getUsername($this->getUserId());
         $product = $this->getProduct();
         $rating = $this->getRating();
         $comment = $this->getComment();
@@ -119,5 +119,4 @@ class Review
         $statement->execute(['id' => $id]);
         return $statement->fetch();
     }
-
 }

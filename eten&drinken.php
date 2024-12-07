@@ -17,6 +17,7 @@
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

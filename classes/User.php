@@ -17,6 +17,7 @@
         private $postal_code;
         private $city;
         private $country;
+        private $credits;
         
         //Get the value of id
         public function getId(){
@@ -189,6 +190,26 @@
             return $this;
         }
 
+        /**
+         * Get the value of credits
+         */ 
+        public function getCredits()
+        {
+                return $this->credits;
+        }
+
+        /**
+         * Set the value of credits
+         *
+         * @return  self
+         */ 
+        public function setCredits($credits)
+        {
+                $this->credits = $credits;
+
+                return $this;
+        }
+
         public function save(){
             $conn = Db::getConnection();
             $statement = $conn->prepare("INSERT INTO users (firstname, lastname) VALUES (:firstname, :lastname)");
@@ -314,23 +335,59 @@
         }
 
         //functie om user te krijgen door de id (getUserId)
-        /*public static function getUserId($id){
+        public static function getUserId($id){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
             $statement->execute(['id' => $id]);
             return $statement->fetch();
-        }*/
-
-        public static function getUserId($conn) {
-            $statement = $conn->prepare("SELECT firstname FROM users WHERE id = :id");
-            $statement->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);        
-            $statement->execute();        
-            $user = $statement->fetch(PDO::FETCH_ASSOC);        
-            if ($user === false) {
-                return null;
-            }
-            return $user['id'];
         }
-        
+
+        //functie om credits te kunnen gebruiken
+        public static function useCredits($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT credits FROM users WHERE id = :id");
+            $statement->execute(['id' => $id]);
+            return $statement->fetch();
+        }
+
+        //functie om credits te kunnen bekijken
+        public static function viewCredits($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT credits FROM users WHERE id = :id");
+            $statement->execute(['id' => $id]);
+            return $statement->fetch();
+        }
+
+        //functie om orders te kunnen bekijken
+        public function viewOrders($id){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `orders` WHERE user_id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetchAll();
+        }
+
+        //function to add order
+        public function addOrder($user_id, $total_price, $quantity)
+        {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("INSERT INTO `order` (user_id, total_price, quantity) VALUES (:user_id, :total_price, :quantity)");
+            $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $statement->bindParam(':total_price', $total_price, PDO::PARAM_STR);
+            $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $statement->execute();
+            return $result;
+        }
+
+        //function om de producten die besteld worden opgeslagen worden in de order_items (order_id, product_id)
+        public function addOrderItems($order_id, $product_id)
+        {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("INSERT INTO order_items (order_id, product_id) VALUES (:order_id, :product_id)");
+            $statement->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+            $statement->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+            $statement->execute();
+            return $result;
+        }
     }    
 ?>

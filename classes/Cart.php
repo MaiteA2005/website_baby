@@ -105,7 +105,7 @@
         }
 
         //functie om winkelmand op te halen
-        public function getCart($user)
+        public static function getCart($user)
         {
             $conn = Db::getConnection();
             $statement = $conn->prepare("select * from cart where user_id = :user_id");
@@ -116,7 +116,7 @@
         }
 
         //functie om product te verwijderen uit winkelmand
-        public function deleteFromCart($user, $product)
+        public static function deleteFromCart($user, $product)
         {
             $conn = Db::getConnection();
             $statement = $conn->prepare("delete from cart where user_id = :user_id and product_id = :product_id");
