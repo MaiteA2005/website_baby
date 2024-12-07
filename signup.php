@@ -8,14 +8,6 @@
 
 	if (!empty($_POST)) {
 		$user = new User();
-
-		if (User::emailExists($_POST['email'])) {
-			$error = 'Email is already in use.';
-		} elseif (User::passwordExists($_POST['password'])) {
-			$error = 'Password is already in use.';
-		} else {
-			User::signUp();
-		}
 	}
 ?><!DOCTYPE html>
 <html lang="en">

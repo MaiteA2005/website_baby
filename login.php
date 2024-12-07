@@ -9,15 +9,7 @@
 
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-
-		// Check for duplicate email
-		if ($user->emailExists($email)) {
-			$error = "This email is already registered.";
-		} 
-		// Check for duplicate password
-		elseif ($user->passwordExists($password)) {
-			$error = "This password is already in use. Please choose a different password.";
-		} 
+	}
 		
 		else {
 			$user->setEmail($email);
@@ -39,7 +31,6 @@
 			} else {
 				$error = "Sorry, we can't log you in with that email address and password. Can you try again?";
 			}
-		}
 	} 
 ?><!DOCTYPE html>
 <html lang="en">
