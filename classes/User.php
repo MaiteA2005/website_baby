@@ -316,12 +316,10 @@
 
             if (self::emailExists($email)) {
                 throw new Exception('Email already exists');
-                echo "Email already exists";
             }
 
             if(self::passwordExists($password)){
                 throw new Exception('Password already exists');
-                echo "Password already exists";
             }
 
             $conn = Db::getConnection();
