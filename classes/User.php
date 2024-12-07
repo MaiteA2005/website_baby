@@ -314,14 +314,6 @@
             $city = $_POST['city'];
             $country = $_POST['country'];
 
-            if (self::emailExists($email)) {
-                throw new Exception('Email already exists');
-            }
-
-            if(self::passwordExists($password)){
-                throw new Exception('Password already exists');
-            }
-
             $conn = Db::getConnection();
             $query = $conn->prepare("insert into users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
             values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
