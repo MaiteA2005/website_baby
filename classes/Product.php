@@ -176,33 +176,13 @@
             return $products;
         }
 
-        /*function add to cart
-        public function addToCart($productId) {
+        //functie om product te verwijderen
+        public static function deleteProduct($id) {
             $conn = Db::getInstance();
-            $stmt = $conn->prepare("INSERT INTO cart (product_id, user_id) VALUES (:productId, :userId)");
-            $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-            $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+            $stmt = $conn->prepare("DELETE FROM products WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
-
-        //function add to favorites
-        public function addToFavorites($productId) {
-            $conn = Db::getInstance();
-            if ($this->Is_favorite($productId)==true) {
-                //add to favorites
-                $stmt = $conn->prepare("INSERT INTO favorites (product_id, user_id) VALUES (:productId, :userId)");
-                $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-                $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-                $stmt->execute();
-            } else {
-                //remove from favorites
-                $stmt = $conn->prepare("DELETE FROM favorites WHERE product_id = :productId AND user_id = :userId");
-                $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-                $stmt->bindParam(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-                $stmt->execute();
-            }
-            
-        }*/
 
 
     }

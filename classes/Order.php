@@ -146,25 +146,25 @@
         }
 
         //function to add order
-        public function addOrder($user_id, $total_price, $quantity)
+        public function placeOrder($date,$user_id, $total_price, $quantity)
         {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO `order` (user_id, total_price, quantity) VALUES (:user_id, :total_price, :quantity)");
+            $statement = $conn->prepare("INSERT INTO `orders` (date, user_id, total_price, quantity) VALUES (:date,:user_id, :total_price, :quantity)");
+            $statement->bindParam(':date', $date, PDO::PARAM_STR);
             $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $statement->bindParam(':total_price', $total_price, PDO::PARAM_STR);
             $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $statement->execute();
-            return $result;
         }
 
         //function om de producten die besteld worden opgeslagen worden in de order_items (order_id, product_id)
-        public function addOrderItems($order_id, $product_id)
+        public function addOrderItems($order_id, $product_id, $quantity)
         {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO order_items (order_id, product_id) VALUES (:order_id, :product_id)");
+            $statement = $conn->prepare("INSERT INTO order_details (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)");
             $statement->bindParam(':order_id', $order_id, PDO::PARAM_INT);
             $statement->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+            $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $statement->execute();
-            return $result;
         }
     }

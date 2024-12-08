@@ -1,66 +1,69 @@
 *{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  }
-
-.container{
-    margin-left: 2%;
-    padding-left: 5%;
-    padding-bottom: 5%;
-    box-shadow: #376c7a 0px 0px 5px ;
-    border-radius: 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 
 .form__field label{
   display: block;
   margin-bottom: 0.2em;
-  margin-left: 5%;
-}
-
-.form__field .label__inline{
-  display: inline-block;
+  margin-left: 11%;
 }
 
 .form__field input[type=text], 
 .form__field input[type=number],
-.form__field select
+.form__field input[type=password]
 {
-  width: 80%;
-  padding: 0.05em;
+  width: 76%;
+  padding: 0.3em;
   font-size: 1.2em;
-  border: 1px solid #376c7a;
+  border: 1px solid black;
   margin-left: 5%;
+  display: block;
+  margin: 0 auto;
 }
 
-.form__field input[type=file]{
-  width: 80%;
-  padding: 0.05em;
-  font-size: 1.1em;
+.form__field select
+{
+  width: 78%;
+  padding: 0.3em;
+  font-size: 1.2em;
+  border: 1px solid black;
   margin-left: 5%;
-  padding-bottom: 15px;
+  display: block;
+  margin: 0 auto;
+}
+
+.form__field input[type=file]
+{
+  width: 77%;
+  padding: 0.3em;
+  font-size: 1.2em;
+  display: block;
+  margin: 0 auto;
 }
 
 .btn{
-    width: 80%;
-    margin: 0.5em auto;
-    margin-left: 5%;
+  width: 77%;
+  padding: 5px 10px ;
 }
 
-
 .btn--primary{
-    background-color: #5d8590;
-    color: white;
-    text-align: center;
-    border: none;
-    padding: 0.3em 2em;
-    font-size: 1.4em;
-    border-radius: 5px;
+  background-color: #a3dbf1;
+  color: white;
+  text-align: center;
+  border: none;
+  font-size: 1.4em;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
 }
 
 form{
-  padding-left: 5%;
+padding-left: 5%;
 }
 
-h2, h3{
-  color: #376c7a;
+h1, h2, h3{
+color: #3F3F3F;
+text-align: center;
+padding-top: 10px;
 }
-  

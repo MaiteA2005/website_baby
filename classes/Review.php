@@ -104,7 +104,7 @@ class Review
     {
         $conn = Db::getConnection();
         $statement = $conn->prepare("INSERT INTO reviews (user_id, product_id, rating, comment) VALUES (:user, :product, :rating, :comment)");
-        $user = $this->getUsername($this->getUserId());
+        $user = $this->getUserId();
         $product = $this->getProduct();
         $rating = $this->getRating();
         $comment = $this->getComment();

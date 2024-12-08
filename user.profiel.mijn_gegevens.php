@@ -1,4 +1,5 @@
 <?php
+    include_once(__DIR__ . "/bootstrap.php");
     require_once(__DIR__ . "/classes/Db.php");
     require_once(__DIR__ . "/classes/User.php");
 
@@ -25,6 +26,35 @@
         echo "User not found.";
         exit;
     }
+
+    // Update user data if form is submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $firstName = $_POST['first_name'];
+        $lastName = $_POST['last_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $streetName = $_POST['street_name'];
+        $houseNumber = $_POST['house_number'];
+        $postalCode = $_POST['postal_code'];
+        $city = $_POST['city'];
+        $country = $_POST['country'];
+
+        // Hash the password if it is not empty
+        if (!empty($password)) {
+            $password = password_hash($password, PASSWORD_DEFAULT);
+        } else {
+            // Keep the old password if the new password is empty
+            $password = $user['password'];
+        }
+
+        $updateQuery = $conn->prepare("UPDATE users SET firstname = ?, lastname = ?, email = ?, password = ?, street_name = ?, house_number = ?, postal_code = ?, city = ?, country = ? WHERE email = ?");
+        $updateQuery->execute([$firstName, $lastName, $email, $password, $streetName, $houseNumber, $postalCode, $city, $country, $_SESSION['email']]);
+
+        // Update session email if changed
+        $_SESSION['email'] = $email;
+
+        echo "Gegevens succesvol bijgewerkt.";
+    }
 ?>
 
 <h2>Mijn gegevens</h2>
@@ -48,7 +78,7 @@
 
         <div class="form__field">
             <label for="password">Password</label>
-            <input type="password" name="password" value="<?php echo htmlspecialchars($user['password']); ?>">
+            <input type="password" name="password" value="<?php echo htmlspecialchars($user['password']); ?>" placeholder="Enter new password">
         </div>
         
         <div class="form__field">

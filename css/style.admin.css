@@ -1,3 +1,73 @@
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 20px;
+    
+  }
+  
+  nav ul li {
+    margin-right: 5%;
+  }
+
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:hover {
+    color: white;
+  }
+  
+  .nav_text{
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 110px;
+  }
+  
+  .icons{
+    padding-left: 50%;
+  }
+  
+  .icon{
+    max-width: 30px;
+    max-width: 30px;
+  }
+  
+  .achtergrondNav{
+    background-color: #a3dbf1 ;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  
+  footer{
+    background-color: #a3dbf1 ;
+    padding: 30px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .terug{
+    font-weight: bolder;
+    font-size: 22px;
+    color: black;
+  }
+  
+  .terug:hover{
+    color: #ffffff;
+  }
+
 a {
     display: inline-block;
 }

@@ -3,6 +3,7 @@
     require_once(__DIR__ . "/classes/Db.php");
     require_once(__DIR__ . "/classes/Cart.php");
     require_once(__DIR__ . "/classes/User.php");
+    require_once(__DIR__ . "/classes/Order.php");
 
     $conn = \Website\XD\Classes\Db::getConnection();
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -61,7 +62,23 @@
         \Website\XD\Classes\Cart::deleteFromCart($userId, $productIdToDelete);
     }
 
+    //producten bestellen met $digitalCredits, gebruiken van class Order.php functie placeOrder en addOrderItems
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
+        $date = date('Y-m-d H:i:s');
+        $order = new \Website\XD\Classes\Order();
+        $order->placeOrder($date, $userId, $totalPrice, $totalQuantity);
+        $order_id = $conn->lastInsertId();
+        foreach ($result as $row) {
+            $order->addOrderItems($order_id, $row['product_id'], $row['quantity']);
+        }
+        $newDigitalCredits = $digitalCredits - $totalPrice;
+        $user = new \Website\XD\Classes\User();
+        $user->setCredits($newDigitalCredits);
+        $user->updateCredits($userId, $newDigitalCredits);
+        header('Location: winkelmand.php');
+    }
 
+    
     
 ?><!DOCTYPE html>
 <html lang="en">
@@ -87,7 +104,7 @@
                 echo "<td><img class='imageCart' src='./" . htmlspecialchars($row['product_image']) . "' alt='" . htmlspecialchars($row['product_title']) . "' width='50'></td>";
                 echo "<td>" . htmlspecialchars($row['product_title']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['quantity']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['total_price']) . "</td>";
+                echo "<td> € " . htmlspecialchars($row['total_price']) . "</td>";
                 echo "<td>
                         <form method='POST' action='#'>
                             <input type='hidden' name='delete_product_id' value='" . htmlspecialchars($row['product_id']) . "'>
@@ -102,7 +119,7 @@
                 echo "<td><strong>Totaal</strong></td>";
                 echo "<td></td>";
                 echo "<td><strong>" . htmlspecialchars($totalQuantity) . "</strong></td>";
-                echo "<td><strong>" . htmlspecialchars($totalPrice) . "</strong></td>";
+                echo "<td><strong> € " . htmlspecialchars($totalPrice) . "</strong></td>";
                 echo "<td></td>";
                 echo "</tr>";
             echo "</tfoot>";

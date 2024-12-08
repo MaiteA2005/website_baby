@@ -318,55 +318,14 @@
             header("location: login.php");
         }
 
-        // functie om gegevens te wijzigen
-        public function update(){
+        //functie om credits te updaten  updateCredits
+        public function updateCredits($id, $credits){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, street_name = :street_name, house_number = :house_number, postal_code = :postal_code, city = :city, country = :country WHERE id = :id");
+            $statement = $conn->prepare("UPDATE users SET credits = :credits WHERE id = :id");
             $statement->execute([
-                'firstname' => $this->getFirstname(),
-                'lastname' => $this->getLastname(),
-                'email' => $this->getEmail(),
-                'password' => $this->getPassword(),
-                'street_name' => $this->getStreet_name(),
-                'house_number' => $this->getHouse_number(),
-                'postal_code' => $this->getPostal_code(),
-                'city' => $this->getCity(),
-                'country' => $this->getCountry(),
-                'id' => $this->getId()
+                'credits' => $credits,
+                'id' => $id
             ]);
-        }
-
-        //functie om user te krijgen door de id (getUserId)
-        public static function getUserById($id){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
-            $statement->execute(['id' => $id]);
-            return $statement->fetch(PDO::FETCH_ASSOC);
-        }
-
-        //functie om credits te kunnen gebruiken
-        public static function useCredits($id){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT credits FROM users WHERE id = :id");
-            $statement->execute(['id' => $id]);
-            return $statement->fetch();
-        }
-
-        //functie om credits te kunnen bekijken
-        public static function viewCredits($id){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT credits FROM users WHERE id = :id");
-            $statement->execute(['id' => $id]);
-            return $statement->fetch();
-        }
-
-        //functie om orders te kunnen bekijken
-        public function viewOrders($id){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `orders` WHERE user_id = :id");
-            $statement->bindValue(":id", $id);
-            $statement->execute();
-            return $statement->fetchAll();
         }
 
         //function to add order

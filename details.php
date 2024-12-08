@@ -6,6 +6,12 @@
     $conn = \Website\XD\Classes\Db::getConnection();
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+     // Check if user is logged in
+     if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+        header('Location: login.php');
+        exit;
+    }
+    
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     if ($id === null) {
         echo '<p>ID is not set. Please provide a product ID in the URL.</p>';
@@ -20,6 +26,7 @@
         die('Product not found.');
     }
 
+    //haal de categorie op van het product
     $categorieId = $product["categorie_id"];
     $categorieStmt = $conn->prepare("SELECT name FROM categories WHERE id = :id");
     $categorieStmt->execute(['id' => $categorieId]);
@@ -27,22 +34,31 @@
   
     $email = $_SESSION['email'];
 
-    // Fetch user data from the database
-    $query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    // Fetch id from the database
+    $query = $conn->prepare("SELECT id, firstname FROM users WHERE email = ?");
     $query->bindValue(1, $email, PDO::PARAM_STR);
     $query->execute();
-    $user = $query->fetch(PDO::FETCH_ASSOC);
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+  
+    if (count($result) > 0) {
+        $user = $result[0];
+        $userId = $user['id'];
+        $firstname = $user['firstname'];
+    } else {
+        echo "User not found.";
+        exit;
+    }
 
     //haal alle reviews uit de databank die al bestaan
     $reviews = (new \Website\XD\Classes\Review())->getReviews($id);
     
     //voeg een nieuwe review toe
-    if ($_POST) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $review = new \Website\XD\Classes\Review();
         $review->setProduct($id);
         $review->setRating($_POST['rating']);
         $review->setComment($_POST['review']);
-        $review->setUserId($user['id']);
+        $review->setUserId($_POST['user_id']);
         $review->save();
         header("Location: details.php?id=" . $id);
     }
@@ -81,6 +97,7 @@
     <div class="reviews">
         <h2>Reviews</h2>
         <form method="post">
+            <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
             <label for="review">Review:</label>
             <textarea name="review" required></textarea>
             <label type="text" for="rating">Rating:</label>
@@ -97,15 +114,8 @@
         <?php
             if ($reviews) {
                 foreach ($reviews as $review) {
-                    $usernameStmt = $conn->prepare("SELECT firstname FROM users WHERE id = ?");
-                    $usernameStmt->execute([$review['user_id']]);
-                    $username = $usernameStmt->fetch(PDO::FETCH_ASSOC);
                     echo '<div class="review">';
-                    if ($username) {
-                        echo '<p>Name: ' . $username['firstname'] . '</p>';
-                    } else {
-                        echo '<p>Name: Unknown</p>';
-                    }
+                    echo '<p>Name: ' . $firstname . '</p>';
                     echo '<p>Rating: ';
                     for ($i = 0; $i < 5; $i++) {
                         if ($i < $review['rating']) {
