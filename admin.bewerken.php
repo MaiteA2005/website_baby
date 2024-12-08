@@ -90,7 +90,7 @@
             <div class="form__field">
                 <input type="submit" value="Bewerken" class="btn btn--primary">
             </div>
-            </form>
+        </form>
     </div>
 </body>
 </html>

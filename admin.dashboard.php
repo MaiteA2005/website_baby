@@ -100,8 +100,8 @@
         </div>
 
         <div class="form__field">
-            <a href="admin.index.php"><input type="submit" value="Toevoegen" class="btn btn--primary"></a>    
-        </div>
+            <input type="submit" value="Toevoegen" class="btn btn--primary">
+        </div>       
     </form>
   </div>
 </body>

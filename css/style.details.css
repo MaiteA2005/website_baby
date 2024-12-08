@@ -23,6 +23,7 @@ p {
 .reviews{
     justify-content: space-between;
     margin: 0 5%;
+    margin-top: 20px;
 }
 
 button {
@@ -47,10 +48,21 @@ p{
     padding: 5px 0px;
 }
 
+.tekstDetail, .reviewContent{
+    margin: 0 5%;
+}
+
 .review{
     border: #3f3f3f solid 1px;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
     max-width: 40%;
+}
+
+.review {
+    border: #3f3f3f solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
 }

@@ -120,6 +120,10 @@
             <div class="form__field">
                 <input type="submit" value="Bewerken" class="btn btn--primary">    
             </div>
+
+            <div class="form__field">
+                <input type="submit" value="Log out" class="btn btn--primary" formaction="logout.php">    
+            </div>
             
         </form>
     </div>

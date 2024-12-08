@@ -32,17 +32,18 @@ tfoot.totaal{
 }
 
 button {
-    margin-top: 20px;
-    margin: 5px;
+    display: block;
+    margin: 20px auto 5px auto;
     padding: 10px 15px;
     font-size: 1em;
     color: #fff;
-    background-color: #a3dbf1 ;
+    background-color: #a3dbf1;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 95%;
 }
-  
+
 button:hover {
     background-color: #f8b4f9;
 }

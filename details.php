@@ -83,56 +83,59 @@
             echo '<div class="detailArtikel">';
             echo '<img class="detailFoto" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
             echo '<h2>' . $product["title"] . '</h2>';
-            echo '<p> Prijs: €' . $product["price"] . '</p>';
-            echo '<p> Kleur: ' . $product["color"] . '</p>';
-            echo '<p> Categorie: ' . $categorie["name"] . '</p>';
-            if (!empty($product["description"])) {
-                echo '<p> Beschrijving: ' . $product["description"] . '</p>';
-            }
+            echo '<div class="tekstDetail">';
+                echo '<p> Prijs: €' . $product["price"] . '</p>';
+                echo '<p> Kleur: ' . $product["color"] . '</p>';
+                echo '<p> Categorie: ' . $categorie["name"] . '</p>';
+                if (!empty($product["description"])) {
+                    echo '<p> Beschrijving: ' . $product["description"] . '</p>';
+                }
             echo '</br><button>Add to cart</button>';
-            echo '</br><button onclick="history.back()">Go Back</button>';
+            echo '<button onclick="history.back()">Go Back</button>';
+            echo '</div>';
             echo '</div>';
         ?>
     </div>
     <div class="reviews">
         <h2>Reviews</h2>
-        <form method="post">
-            <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
-            <label for="review">Review:</label>
-            <textarea name="review" required></textarea>
-            <label type="text" for="rating">Rating:</label>
-            <select name="rating" required>
-                <option value="0">☆☆☆☆☆</option>
-                <option value="1">⭐☆☆☆☆</option>
-                <option value="2">⭐⭐☆☆☆</option>
-                <option value="3">⭐⭐⭐☆☆</option>
-                <option value="4">⭐⭐⭐⭐☆</option>
-                <option value="5">⭐⭐⭐⭐⭐</option>
-            </select>
-            <button type="submit">Submit Review</button>
-        </form>
-        <?php
-            if ($reviews) {
-                foreach ($reviews as $review) {
-                    echo '<div class="review">';
-                    echo '<p>Name: ' . $firstname . '</p>';
-                    echo '<p>Rating: ';
-                    for ($i = 0; $i < 5; $i++) {
-                        if ($i < $review['rating']) {
-                            echo '⭐';
-                        } else {
-                            echo '☆';
+        <div class="reviewContent">
+            <form method="post">
+                <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
+                <label for="review">Review:</label>
+                <textarea name="review" required></textarea>
+                <label type="text" for="rating">Rating:</label>
+                <select name="rating" required>
+                    <option value="0">☆☆☆☆☆</option>
+                    <option value="1">⭐☆☆☆☆</option>
+                    <option value="2">⭐⭐☆☆☆</option>
+                    <option value="3">⭐⭐⭐☆☆</option>
+                    <option value="4">⭐⭐⭐⭐☆</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
+                <button type="submit">Submit Review</button>
+            </form>
+            <?php
+                if ($reviews) {
+                    foreach ($reviews as $review) {
+                        echo '<div class="review">';
+                        echo '<p>Name: ' . $firstname . '</p>';
+                        echo '<p>Rating: ';
+                        for ($i = 0; $i < 5; $i++) {
+                            if ($i < $review['rating']) {
+                                echo '⭐';
+                            } else {
+                                echo '☆';
+                            }
                         }
+                        echo '</p>';
+                        echo '<p>Review: ' . $review['comment'] . '</p>';
+                        echo '</div>';
                     }
-                    echo '</p>';
-                    echo '<p>Review: ' . $review['comment'] . '</p>';
-                    echo '</div>';
+                } else {
+                    echo '<p>No reviews yet. Be the first to review this product!</p>';
                 }
-            } else {
-                echo '<p>No reviews yet. Be the first to review this product!</p>';
-            }
-        ?>
-        
+            ?>
+        </div>
     </div>
 </body>
 </html>
