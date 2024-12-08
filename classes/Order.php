@@ -146,14 +146,15 @@
         }
 
         //function to add order
-        public function placeOrder($date,$user_id, $total_price, $quantity)
+        public function placeOrder($date, $user_id, $total_price, $quantity, $order_items_id)
         {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO `orders` (date, user_id, total_price, quantity) VALUES (:date,:user_id, :total_price, :quantity)");
+            $statement = $conn->prepare("INSERT INTO `orders` (date, user_id, total_price, quantity, order_items_id) VALUES (:date, :user_id, :total_price, :quantity, :order_items_id)");
             $statement->bindParam(':date', $date, PDO::PARAM_STR);
             $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $statement->bindParam(':total_price', $total_price, PDO::PARAM_STR);
             $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $statement->bindParam(':order_items_id', $order_items_id, PDO::PARAM_INT);
             $statement->execute();
         }
 
