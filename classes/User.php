@@ -231,6 +231,12 @@
 
             $hash = $user['password'];
             if(password_verify($password, $hash)){
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email'] = $user['email'];
                 return true;
             } else{
                 return false;
