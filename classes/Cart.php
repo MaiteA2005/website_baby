@@ -102,7 +102,6 @@
             $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $statement->bindParam(':total_price', $total, PDO::PARAM_STR);
             $statement->execute();
-            return $result;
         }
 
        
