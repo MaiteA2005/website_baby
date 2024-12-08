@@ -3,11 +3,17 @@
 	require_once(__DIR__ . "/classes/Db.php");
 
 	use Website\XD\Classes\User;
+	use Website\XD\Classes\Db;
 
 	$error = '';
 
 	if (!empty($_POST)) {
-		$user = new User();
+		if (!empty($_POST)) {
+			$user = new User();
+	
+			User::signUp();
+			
+		}
 	}
 ?><!DOCTYPE html>
 <html lang="en">

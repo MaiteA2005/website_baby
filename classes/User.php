@@ -209,14 +209,20 @@
                 return $this;
         }
 
-        public function save(){
+        public function save() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO users (firstname, lastname) VALUES (:firstname, :lastname)");
-            $statement->execute([
-                'firstname' => $this->getFirstname(),
-                'lastname' => $this->getLastname()
+            $statement = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country) VALUES (:firstname, :lastname, :email, :password, :street_name, :house_number, :postal_code, :city, :country)");
+            return $statement->execute([
+                'firstname' => $this->getFirstName(),
+                'lastname' => $this->getLastName(),
+                'email' => $this->getEmail(),
+                'password' => $this->getPassword(),
+                'street_name' => $this->getStreet_name(),
+                'house_number' => $this->getHouse_number(),
+                'postal_code' => $this->getPostal_code(),
+                'city' => $this->getCity(),
+                'country' => $this->getCountry()
             ]);
-
         }
         
         public static function canLogin($email, $password){
@@ -231,12 +237,6 @@
 
             $hash = $user['password'];
             if(password_verify($password, $hash)){
-                if (session_status() == PHP_SESSION_NONE) {
-                    session_start();
-                }
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['email'] = $user['email'];
                 return true;
             } else{
                 return false;
@@ -287,18 +287,8 @@
             }
         }
 
-        // Check if email exists
-        public static function emailExists($email){
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
-            $statement->bindValue(':email', $email);
-            $statement->execute();
-            $user = $statement->fetch();
-            return $user ? true : false;
-        }
-
         //maak een functie voor de sign up
-        public static function signUp(){
+        /*public static function signUp(){
             $first_name = $_POST['first_name']; 
             $last_name = $_POST['last_name'];
             $email = $_POST['email'];
@@ -312,10 +302,7 @@
             $city = $_POST['city'];
             $country = $_POST['country'];
 
-            if (self::emailExists($email)) {
-                throw new Exception('Email already exists');
-            }
-
+            
             $conn = Db::getConnection();
             $query = $conn->prepare("insert into users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country ) 
             values (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
@@ -332,6 +319,56 @@
 
             $query->execute();
             header("location: login.php");
+        }*/
+
+        public static function signUp() {
+            try {
+                $first_name = $_POST['first_name']; 
+                $last_name = $_POST['last_name'];
+                $email = $_POST['email'];
+                $options = [
+                    'cost' => 12,
+                ];
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+                $street_name = $_POST['street_name'];
+                $house_number = $_POST['house_number'];
+                $postal_code = $_POST['postal_code'];
+                $city = $_POST['city'];
+                $country = $_POST['country'];
+        
+                $conn = Db::getConnection();
+        
+                // Check if the email already exists
+                $checkEmailQuery = $conn->prepare("SELECT COUNT(*) AS count FROM users WHERE email = :email");
+                $checkEmailQuery->bindValue(':email', $email);
+                $checkEmailQuery->execute();
+                $result = $checkEmailQuery->fetch(PDO::FETCH_ASSOC);
+        
+                if ($result['count'] > 0) {
+                    throw new Exception("This email address is already registered. Please use another email.");
+                }
+        
+                // Insert new user into the database
+                $query = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, street_name, house_number, postal_code, city, country) 
+                    VALUES (:firstname, :lastname, :email, :password, :streetname, :housenumber, :postalcode, :city, :country)");
+        
+                $query->bindValue(':firstname', $first_name);
+                $query->bindValue(':lastname', $last_name);
+                $query->bindValue(':email', $email);
+                $query->bindValue(':password', $password);
+                $query->bindValue(':streetname', $street_name);
+                $query->bindValue(':housenumber', $house_number);
+                $query->bindValue(':postalcode', $postal_code);
+                $query->bindValue(':city', $city);
+                $query->bindValue(':country', $country);
+        
+                $query->execute();
+        
+                header("location: login.php");
+            } catch (Exception $e) {
+                // Handle errors (e.g., email already exists or database issues)
+                echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+            }
         }
 
         //functie om credits te updaten  updateCredits
