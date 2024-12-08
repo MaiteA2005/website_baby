@@ -281,6 +281,16 @@
             }
         }
 
+        // Check if email exists
+        public static function emailExists($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $user = $statement->fetch();
+            return $user ? true : false;
+        }
+
         //maak een functie voor de sign up
         public static function signUp(){
             $first_name = $_POST['first_name']; 
