@@ -281,15 +281,6 @@
             }
         }
 
-        //Check if email already exists
-        public static function emailExists($email) {
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
-            $statement->bindValue(':email', $email);
-            $statement->execute();
-            return $statement->fetchColumn() > 0;
-        }
-
         //maak een functie voor de sign up
         public static function signUp(){
             $first_name = $_POST['first_name']; 
@@ -346,11 +337,11 @@
         }
 
         //functie om user te krijgen door de id (getUserId)
-        public static function getUserId($id){
+        public static function getUserById($id){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
             $statement->execute(['id' => $id]);
-            return $statement->fetch();
+            return $statement->fetch(PDO::FETCH_ASSOC);
         }
 
         //functie om credits te kunnen gebruiken

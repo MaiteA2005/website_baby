@@ -94,9 +94,10 @@
 
         //functie om product toe te voegen aan winkelmand
         
-        public static function addToCart( $productId, $quantity, $total) {
+        public static function addToCart($userId, $productId, $quantity, $total) {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("INSERT INTO cart (product_id, quantity, total_price) VALUES (:product_id, :quantity, :total_price)");
+            $statement = $conn->prepare("INSERT INTO cart (user_id, product_id, quantity, total_price) VALUES (:user_id, :product_id, :quantity, :total_price)");
+            $statement->bindParam(':user_id', $userId, \PDO::PARAM_INT);
             $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
             $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $statement->bindParam(':total_price', $total, PDO::PARAM_STR);
@@ -104,6 +105,7 @@
             return $result;
         }
 
+       
         //functie om winkelmand op te halen
         public static function getCart($user)
         {

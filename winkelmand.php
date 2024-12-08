@@ -5,14 +5,37 @@
     require_once(__DIR__ . "/classes/User.php");
 
     $conn = \Website\XD\Classes\Db::getConnection();
-    $id=\Website\XD\Classes\User::isLoggedIn();
-    $userId = \Website\XD\Classes\User::getUserId($id);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Check if user is logged in
+    if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+        header('Location: login.php');
+        exit;
+    }
+
+    $email = $_SESSION['email'];
+
+    // Fetch id from the database
+    $query = $conn->prepare("SELECT id, credits FROM users WHERE email = ?");
+    $query->bindValue(1, $email, PDO::PARAM_STR);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($result) > 0) {
+        $user = $result[0];
+        $userId = $user['id'];
+        $digitalCredits = $user['credits'];
+    } else {
+        echo "User not found.";
+        exit;
+    }
     
     $statement = $conn->prepare("SELECT product_id, quantity, total_price FROM cart WHERE user_id = :user_id");
     $statement->bindValue(':user_id', $userId, PDO::PARAM_INT);
     $statement->execute();
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    //ophalen van producten
     foreach ($result as &$row) {
         $productStatement = $conn->prepare("SELECT title, image FROM products WHERE id = :product_id");
         $productStatement->bindValue(':product_id', $row['product_id'], PDO::PARAM_INT);
@@ -26,92 +49,20 @@
     $totalQuantity = 0;
     $totalPrice = 0.0;
 
+    //optellen van prijs en hoeveelheid
     foreach ($result as $row) {
         $totalQuantity += $row['quantity'];
         $totalPrice += $row['total_price'];
     }
 
+    //delete producten van cart
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product_id'])) {
         $productIdToDelete = $_POST['delete_product_id'];
         \Website\XD\Classes\Cart::deleteFromCart($userId, $productIdToDelete);
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
-        $totalAmount = 0.0;
-        foreach ($result as $row) {
-            $totalAmount += $row['total_price'];
-        }
 
-        $userQuery = "SELECT credits FROM users WHERE id = :user_id";
-        $stmt = $conn->prepare($userQuery);
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && $user['credits'] >= $totalAmount) {
-            $orderQuery = "INSERT INTO orders (user_id, total_amount, order_date) VALUES (?, ?, NOW())";
-            $stmt = $conn->prepare($orderQuery);
-            $stmt->bindValue(1, $userId, PDO::PARAM_INT);
-            $stmt->bindValue(2, $totalAmount, PDO::PARAM_STR);
-            $stmt->execute();
-
-            $orderId = $conn->lastInsertId();
-
-            $cartQuery = "SELECT * FROM cart WHERE user_id = ?";
-            $stmt = $conn->prepare($cartQuery);
-            $stmt->bindValue(1, $userId, PDO::PARAM_INT);
-            $stmt->execute();
-            $cartResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($cartResult as $cart) {
-                $orderDetailsQuery = "INSERT INTO order_details (order_id, product_id, quantity) VALUES (?, ?, ?)";
-                $stmt = $conn->prepare($orderDetailsQuery);
-                $stmt->bindValue(1, $orderId, PDO::PARAM_INT);
-                $stmt->bindValue(2, $cart['product_id'], PDO::PARAM_INT);
-                $stmt->bindValue(3, $cart['quantity'], PDO::PARAM_INT);
-                $stmt->execute();
-            }
-
-            $clearCartQuery = "DELETE FROM cart WHERE user_id = ?";
-            $stmt = $conn->prepare($clearCartQuery);
-            $stmt->bindValue(1, $userId, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $updateCurrencyQuery = "UPDATE users SET credits = credits - ? WHERE id = ?";
-            $stmt = $conn->prepare($updateCurrencyQuery);
-            $stmt->bindValue(1, $totalAmount, PDO::PARAM_STR);
-            $stmt->bindValue(2, $userId, PDO::PARAM_INT);
-            $stmt->execute();
-
-            echo "Bestelling succesvol geplaatst!";
-        } else {
-            echo "Onvoldoende saldo om de bestelling te plaatsen.";
-        }
-    }
-
-    $statement = $conn->prepare("SELECT product_id, quantity, total_price FROM cart WHERE user_id = :user_id");
-    $statement->bindValue(':user_id', $userId, PDO::PARAM_INT);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($result as &$row) {
-        $productStatement = $conn->prepare("SELECT title, image FROM products WHERE id = :product_id");
-        $productStatement->bindValue(':product_id', $row['product_id'], PDO::PARAM_INT);
-        $productStatement->execute();
-        $product = $productStatement->fetch(PDO::FETCH_ASSOC);
-        $row['product_title'] = $product['title'];
-        $row['product_image'] = $product['image'];
-    }
-    unset($row); // Break the reference with the last element
-
-    $totalQuantity = 0;
-    $totalPrice = 0.0;
-
-    foreach ($result as $row) {
-        $totalQuantity += $row['quantity'];
-        $totalPrice += $row['total_price'];
-    }
-
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

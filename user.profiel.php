@@ -7,7 +7,6 @@
     $conn = \Website\XD\Classes\Db::getConnection();
     $id = \Website\XD\Classes\User::isLoggedIn();
     
-
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>

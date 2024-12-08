@@ -1,6 +1,7 @@
 <?php
-    include_once (__DIR__ . '/bootstrap.php'); // Adjust the path if necessary
+    include_once (__DIR__ . '/bootstrap.php');
     require_once(__DIR__ . '/classes/Db.php');
+    require_once(__DIR__ . "/classes/Cart.php");
 
     $conn = \Website\XD\Classes\Db::getConnection();
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,6 +17,54 @@
     $statement = $conn->prepare("SELECT * FROM products");
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if user is logged in
+    if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+        header('Location: login.php');
+        exit;
+    }
+
+    $statement = $conn->prepare("SELECT * FROM products");
+    $statement->execute();
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    
+    $email = $_SESSION['email'];
+
+    // Fetch id from the database
+    $query = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $query->bindValue(1, $email, PDO::PARAM_STR);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($result) > 0) {
+        $user = $result[0];
+        $userId = $user['id'];
+    } else {
+        echo "User not found.";
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        $productId = $_POST['product_id'];
+        $productQuantity = 1; // Default quantity to add
+
+        // Fetch product details
+        $statement = $conn->prepare("SELECT * FROM products WHERE id = :id");
+        $statement->bindParam(':id', $productId, PDO::PARAM_INT);
+        $statement->execute();
+        $product = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($product) {
+            $total = $product["price"];
+            \Website\XD\Classes\Cart::addToCart($userId, $productId, $productQuantity, $total);
+
+            header("Location: winkelmand.php");
+            exit();
+        } else {
+            echo "Product not found.";
+        }
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -46,8 +95,14 @@
                     echo '<img class="foto" id="image-' . '" src="./' . $product["image"] . '" alt="' . $product["title"] . '">';
                     echo '<h2>' . $product["title"] . '</h2>';
                     echo '<p>Price: €' . $product["price"] . '</p>';
-                    echo '</br><button>Add to cart</button>';
-                    echo '<button>View Details</button>';
+                    echo '<form method="POST" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $product["id"] . '">';
+                        echo '<button type="submit" name="add_to_cart">Add to cart</button>';
+                    echo '</form>';
+                    echo '<form action="details.php" method="GET">';
+                        echo '<input type="hidden" name="id" value="' . $product["id"] . '">';
+                        echo '<button type="submit">View Details</button>';
+                    echo '</form>';
                     echo '</div>';
                 }
             } else {

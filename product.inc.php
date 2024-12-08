@@ -1,8 +1,43 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         require_once 'classes/Cart.php';
-        require_once 'classes/Db.php'; 
 
+        // Check if user is logged in
+        if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+            header('Location: login.php');
+            exit;
+        }
+
+        $email = $_SESSION['email'];
+
+        // Fetch id from the database
+        $query = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $query->bindValue(1, $email, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) > 0) {
+            $user = $result[0];
+            $userId = $user['id'];
+        } else {
+            echo "User not found.";
+            exit;
+        }
+        
+        $statement = $conn->prepare("SELECT product_id, quantity, total_price FROM cart WHERE user_id = :user_id");
+        $statement->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //ophalen van producten
+        foreach ($result as &$row) {
+            $productStatement = $conn->prepare("SELECT title, image FROM products WHERE id = :product_id");
+            $productStatement->bindValue(':product_id', $row['product_id'], PDO::PARAM_INT);
+            $productStatement->execute();
+            $product = $productStatement->fetch(PDO::FETCH_ASSOC);
+            $row['product_title'] = $product['title'];
+            $row['product_image'] = $product['image'];
+        }
         $productId = $_POST['product_id'];
         $quantity = 1; 
 
@@ -11,10 +46,11 @@
         $statement->execute();
         $product = $statement->fetch(PDO::FETCH_ASSOC);
 
+        //
         if ($product) {
             $total = $product["price"];
             $cart = new \Website\XD\Classes\Cart();
-            $cart->addToCart($productId, $quantity, $total);
+            $cart->addToCart($userId, $productId, $quantity, $total);
 
             header("Location: winkelmand.php");
             exit();
