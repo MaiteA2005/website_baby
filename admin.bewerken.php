@@ -14,13 +14,30 @@
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Handle form submission to update product details
         $title = $_POST['title'];
         $description = $_POST['description'];
         $price = $_POST['price'];
         $color = $_POST['color'];
-        $categorie_id = $_POST['category'];
-        $image = $_FILES['image']['name'];
+        $category = $_POST['category'];
+        $image = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : '';
+        
+        // Mapping categories to category IDs
+        $category_map = [
+            'Speelgoed' => 1,
+            'Kleren' => 2,
+            'Eten & drinken' => 3,
+            'Slaaphulpjes' => 4
+        ];
+        
+        $categorie_id = $category_map[$category];
+
+        // Upload image
+        $target_dir = "images/";
+        $target_file = $target_dir . basename($image);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+
+        // Prepend the image path with "/images/"
+        $image_path = "./images/" . $image;
 
         // Update product details in the database
         $updateStmt = $conn->prepare("UPDATE products SET title = :title, description = :description, price = :price, color = :color, categorie_id = :categorie_id, image = :image WHERE id = :id");
@@ -29,7 +46,7 @@
         $updateStmt->bindParam(':price', $price);
         $updateStmt->bindParam(':color', $color);
         $updateStmt->bindParam(':categorie_id', $categorie_id);
-        $updateStmt->bindParam(':image', $image);
+        $updateStmt->bindParam(':image', $image_path);
         $updateStmt->bindParam(':id', $productId, PDO::PARAM_INT);
         $updateStmt->execute();
 

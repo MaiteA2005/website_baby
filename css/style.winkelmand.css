@@ -47,3 +47,9 @@ button {
 button:hover {
     background-color: #f8b4f9;
 }
+
+p{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+}
