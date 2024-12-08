@@ -66,7 +66,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         $date = date('Y-m-d H:i:s');
         $order = new \Website\XD\Classes\Order();
-        $order->placeOrder($date, $userId, $totalPrice, $totalQuantity);
+        $order->placeOrder($date, $userId, $totalPrice, $totalQuantity, $digitalCredits);
         $order_id = $conn->lastInsertId();
         foreach ($result as $row) {
             $order->addOrderItems($order_id, $row['product_id'], $row['quantity']);
